@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,9 +40,7 @@ public class PacienteController {
 	@Autowired
 	private IPacienteService pacienteService;
 	
-    @Autowired
-    PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private JwtGenerator jwtGenerator;
 
@@ -70,7 +67,7 @@ public class PacienteController {
             return new ResponseEntity<String>("Campos vacíos o email invalido", HttpStatus.BAD_REQUEST);
 		Paciente paciente = new Paciente(nuevoPaciente.getNombre(),nuevoPaciente.getApellido(), nuevoPaciente.getTipo_doc(),
 								nuevoPaciente.getCc(),nuevoPaciente.getFec_nac(), nuevoPaciente.getCiudad(),nuevoPaciente.getDireccion(),
-								nuevoPaciente.getBarrio(),passwordEncoder.encode(nuevoPaciente.getPassword()),nuevoPaciente.getSexo(),
+								nuevoPaciente.getBarrio(),nuevoPaciente.getPassword(),nuevoPaciente.getSexo(),
 										nuevoPaciente.getEmail(),nuevoPaciente.getCelular());
 		if(pacienteService.findUsuario(paciente) == null) {
 			pacienteService.save(paciente);
