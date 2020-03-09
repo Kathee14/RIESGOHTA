@@ -34,7 +34,7 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Paciente findUsuario(NuevoPaciente nuevoPaciente) {
+	public Paciente findPaciente(NuevoPaciente nuevoPaciente) {
 		return (Paciente) pacienteDao.findByCc(nuevoPaciente.getCc());
 	}
 
@@ -46,7 +46,7 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	public Paciente findByCc(String cc) {
-		return pacienteDao.findByCc(cc);
+		return (Paciente) pacienteDao.findByCc(cc);
 	}
 
 	@Override
@@ -62,6 +62,11 @@ public class PacienteServiceImpl implements IPacienteService{
 	@Override
 	public Paciente checkUsuarioLogin(Login login) {
 		return (Paciente) pacienteDao.findByCcAndPassword(login.getCc(),(login.getPassword()));
+	}
+
+	@Override
+	public Paciente findUsuario(NuevoPaciente nuevoPaciente) {
+		return (Paciente) pacienteDao.findByCc(nuevoPaciente.getCc());
 	}
 	
 }

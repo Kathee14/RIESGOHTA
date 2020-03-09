@@ -67,7 +67,6 @@ public class Paciente implements Serializable {
 	@Column(name="sexo")
 	private String sexo;
 	
-	@NotBlank
 	@Email
 	@Column(length=60)
 	private String email;

@@ -2,69 +2,38 @@ package com.uis.simon.hta.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import com.uis.simon.hta.entity.Paciente;
 
+public class ModificarPaciente {
 
-public class NuevoPaciente {
-	
-	@NotBlank
-	@Column(name="nombre")
 	private String nombre;
-	
-	@NotBlank
-	@Column(name="apellido")
+
 	private String apellido;
-	
-	@NotBlank
-	@Column(name="tipo_doc")
+
 	private String tipo_doc;
-	
-	@NotBlank
-	@Column(name="cc", unique=true)
+
 	private String cc;
-	
-	@NotNull
-	@Column(name="fec_nac")
+
 	private Date fec_nac;
-	
-	@NotBlank
-	@Column(name="ciudad")
+
 	private String ciudad;
-	
-	@NotBlank
-	@Column(name="direccion")
+
 	private String direccion;
-	
-	@NotBlank
-	@Column(name="barrio")
+
 	private String barrio;
-	
-	@NotBlank
-	@Column(name="password")
-	private String password;
-	
-	@Column(name="sexo")
+
 	private String sexo;
 	
-	@NotBlank
-	@Email
-	@Column(length=60)
 	private String email;
-	
-	@NotNull
-	@Column(name="celular")
+
 	private Long celular;
 	
-
-	 public NuevoPaciente(){}
-
-	public NuevoPaciente(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String tipo_doc,
-			@NotBlank String cc, @NotNull Date fec_nac, @NotBlank String ciudad, @NotBlank String direccion,
-			@NotBlank String barrio, @NotBlank String password, String sexo, @NotBlank @Email String email,
-			@NotNull Long celular) {
+	
+	public ModificarPaciente() {}
+	
+	
+	public ModificarPaciente(String nombre, String apellido, String tipo_doc, String cc, Date fec_nac, String ciudad,
+			String direccion, String barrio, String sexo, String email, Long celular) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -74,10 +43,24 @@ public class NuevoPaciente {
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		this.barrio = barrio;
-		this.password = password;
 		this.sexo = sexo;
 		this.email = email;
 		this.celular = celular;
+	}
+	
+	public ModificarPaciente(Paciente paciente) {
+		this.nombre=paciente.getNombre();
+		this.apellido=paciente.getApellido();
+		this.tipo_doc=paciente.getTipo_doc();
+		this.cc=paciente.getCc();
+		this.fec_nac=paciente.getFec_nac();
+		this.ciudad=paciente.getCiudad();
+		this.direccion=paciente.getDireccion();
+		this.barrio=paciente.getBarrio();
+		this.sexo=paciente.getSexo();
+		this.email=paciente.getEmail();
+		this.celular=paciente.getCelular();		
+	
 	}
 
 	public String getNombre() {
@@ -142,14 +125,6 @@ public class NuevoPaciente {
 
 	public void setBarrio(String barrio) {
 		this.barrio = barrio;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getSexo() {

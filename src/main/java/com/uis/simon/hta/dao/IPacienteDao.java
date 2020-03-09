@@ -11,4 +11,5 @@ public interface IPacienteDao extends CrudRepository<Paciente, Long> {
 	
 	public Paciente findByCcAndPassword(String cc, String password);
 	
+
 	}

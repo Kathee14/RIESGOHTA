@@ -1,6 +1,7 @@
 package com.uis.simon.hta.controller;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uis.simon.hta.dto.NuevoPaciente;
 import com.uis.simon.hta.entity.Enfermero;
 import com.uis.simon.hta.entity.Paciente;
+import com.uis.simon.hta.mapper.MapPaciente;
 import com.uis.simon.hta.dto.JwtUser;
 import com.uis.simon.hta.dto.Login;
+import com.uis.simon.hta.dto.ModificarPaciente;
 import com.uis.simon.hta.security.JwtGenerator;
 import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
@@ -50,11 +53,15 @@ public class PacienteController {
 		return pacienteService.findAll();
 	}
 	
-	@PostMapping("/find_usuario")
-	public ResponseEntity<?> findUsuario(@RequestBody Paciente paciente){
-		Paciente pacienteDb = pacienteService.findUsuario(paciente);
+	@PostMapping("/findUsuario")
+	public ResponseEntity<?> findUsuario(@RequestBody NuevoPaciente nuevoPaciente){
+		Paciente pacienteDb = pacienteService.findPaciente(nuevoPaciente);
 		if(pacienteDb!=null) {
-			return new ResponseEntity<>(pacienteDb, HttpStatus.OK);
+			List<Paciente> pacientes = new ArrayList<>();
+			pacientes.add(pacienteDb);
+			List<ModificarPaciente> modificarPacientes = new ArrayList<>();
+			modificarPacientes = MapPaciente.convertirLista(pacientes);
+			return new ResponseEntity<>(modificarPacientes, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

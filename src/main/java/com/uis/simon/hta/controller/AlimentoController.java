@@ -1,5 +1,6 @@
 package com.uis.simon.hta.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uis.simon.hta.dto.ListaAlimentos;
 import com.uis.simon.hta.entity.Alimento;
+import com.uis.simon.hta.mapper.MapAlimento;
 import com.uis.simon.hta.service.IAlimentoService;
 
 @RestController
@@ -19,10 +22,13 @@ public class AlimentoController {
 	@Autowired
 	IAlimentoService alimentoService;
 	
+	
 	 @GetMapping("/lista")
-	    public ResponseEntity<List<Alimento>> getLista(){
-	        List<Alimento> lista = alimentoService.findAll();
-	        return new ResponseEntity<List<Alimento>>(lista, HttpStatus.OK);
-	    }
+	 public ResponseEntity<?> getLista(){
+		 List<Alimento> lista = alimentoService.findAll();	 
+		 List<ListaAlimentos> listaA = new ArrayList<>();
+		 listaA = MapAlimento.convertirLista(lista);
+         return new ResponseEntity<>(listaA, HttpStatus.OK);
+   }
 	
 }
