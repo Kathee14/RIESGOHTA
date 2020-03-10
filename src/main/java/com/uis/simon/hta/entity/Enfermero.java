@@ -38,7 +38,9 @@ public class Enfermero {
 	private String password;
 	
 	@ManyToMany
-    @JoinTable(name = "visita", joinColumns = @JoinColumn(name = "enfermero_id"), inverseJoinColumns = @JoinColumn(name = "paciente_id"))
+    @JoinTable(name = "visita", 
+    	joinColumns = @JoinColumn(name = "enfermero_id", referencedColumnName = "id"), 
+    	inverseJoinColumns = @JoinColumn(name = "paciente_id", referencedColumnName = "id" ))
     private Set<Paciente> paciente = new HashSet<>();
 	
 	@Column(name= "create_at")
@@ -96,6 +98,14 @@ public class Enfermero {
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public Set<Paciente> getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Set<Paciente> paciente) {
+		this.paciente = paciente;
 	}
 	
 }

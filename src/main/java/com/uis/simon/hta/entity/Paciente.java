@@ -3,7 +3,10 @@ package com.uis.simon.hta.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +14,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 
 @Entity
@@ -78,12 +87,18 @@ public class Paciente implements Serializable {
 	@Column(name= "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
-	
-	@PrePersist
+
+	@PrePersist 
 	public void prePersist() {
 		createAt = new Date();
 	}
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinTable(name="visitas",
+		joinColumns = @JoinColumn(name="paciente_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name="enfermero_id", referencedColumnName = "id"))
+	private Set<Enfermero> enfermeros = new HashSet<Enfermero>();
 	
 	public Paciente() {}
 
@@ -217,6 +232,13 @@ public class Paciente implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
 
+	public Set<Enfermero> getEnfermeros() {
+		return enfermeros;
+	}
+
+	public void setEnfermeros(Set<Enfermero> enfermeros) {
+		this.enfermeros = enfermeros;
+	}
+	
 }

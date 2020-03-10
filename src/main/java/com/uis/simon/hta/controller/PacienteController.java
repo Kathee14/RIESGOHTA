@@ -95,8 +95,17 @@ public class PacienteController {
 		Paciente pacienteDb = null;
 		pacienteDb = pacienteService.findByCc(cc);
 			if (pacienteDb != null) {
-				pacienteDb.setEmail(paciente.getEmail());
+				pacienteDb.setNombre(paciente.getNombre());
 				pacienteDb.setApellido(paciente.getApellido());
+				pacienteDb.setTipo_doc(paciente.getTipo_doc());
+				pacienteDb.setCc(paciente.getCc());
+				pacienteDb.setFec_nac(paciente.getFec_nac());
+				pacienteDb.setCiudad(paciente.getCiudad());
+				pacienteDb.setDireccion(paciente.getDireccion());
+				pacienteDb.setBarrio(paciente.getBarrio());
+				pacienteDb.setSexo(paciente.getSexo());
+				pacienteDb.setEmail(paciente.getEmail());
+				pacienteDb.setCelular(paciente.getCelular());	
 				pacienteService.updateUsuario(pacienteDb);
 				return new ResponseEntity<>(pacienteDb, HttpStatus.OK);
 			} else {
