@@ -45,5 +45,11 @@ public class EnfermeroServiceImpl implements IEnfermeroService {
 		return (Enfermero) enfermeroDao.findByCcAndPassword(login.getCc(), login.getPassword());
 
 	}
+
+	@Override
+	public void save(Enfermero enfermero) {
+		enfermeroDao.save(enfermero);
+		
+	}
 	
 }

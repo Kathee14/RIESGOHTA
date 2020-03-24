@@ -3,7 +3,6 @@ package com.uis.simon.hta.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,15 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.JoinColumn;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 
@@ -93,12 +88,8 @@ public class Paciente implements Serializable {
 		createAt = new Date();
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JsonBackReference
-	@JoinTable(name="visitas",
-		joinColumns = @JoinColumn(name="paciente_id", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name="enfermero_id", referencedColumnName = "id"))
-	private Set<Enfermero> enfermeros = new HashSet<Enfermero>();
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
+	private Set<Enfermero> enfermeros;
 	
 	public Paciente() {}
 

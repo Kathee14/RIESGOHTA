@@ -8,4 +8,6 @@ public interface IAlimentoService {
 	
 	public List<Alimento> findAll();
 	
+	public List<Alimento> findAlimentoByTipoalimento(String tipoalimento);	
+	
 	}

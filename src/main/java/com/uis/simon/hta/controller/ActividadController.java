@@ -1,11 +1,13 @@
 package com.uis.simon.hta.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import com.uis.simon.hta.entity.Actividad;
 import com.uis.simon.hta.mapper.MapActividad;
 import com.uis.simon.hta.service.IActividadService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/user/actividad")
 public class ActividadController {

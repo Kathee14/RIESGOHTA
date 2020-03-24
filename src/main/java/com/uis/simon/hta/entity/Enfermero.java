@@ -1,5 +1,6 @@
 package com.uis.simon.hta.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,9 +18,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 @Entity
 @Table(name="enfermero")
-public class Enfermero {
+public class Enfermero implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,6 +44,7 @@ public class Enfermero {
 	private String password;
 	
 	@ManyToMany
+	@JsonBackReference
     @JoinTable(name = "visita", 
     	joinColumns = @JoinColumn(name = "enfermero_id", referencedColumnName = "id"), 
     	inverseJoinColumns = @JoinColumn(name = "paciente_id", referencedColumnName = "id" ))
@@ -106,6 +113,11 @@ public class Enfermero {
 
 	public void setPaciente(Set<Paciente> paciente) {
 		this.paciente = paciente;
+	}
+
+	public void addVisita(Paciente paciente) {
+	  this.paciente.add(paciente);
+		
 	}
 	
 }

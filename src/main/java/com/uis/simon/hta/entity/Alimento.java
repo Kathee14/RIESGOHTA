@@ -23,7 +23,7 @@ public class Alimento {
 	private int calorias;
 	
 	@Column(name="tipo_alimento")
-	private String tipo_alimento;	
+	private String tipoalimento;	
 	
 	public Long getId() {
 		return id;
@@ -43,12 +43,11 @@ public class Alimento {
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
 	}
-	public String getTipo_alimento() {
-		return tipo_alimento;
+	public String getTipoalimento() {
+		return tipoalimento;
 	}
-	public void setTipo_alimento(String tipo_alimento) {
-		this.tipo_alimento = tipo_alimento;
+	public void setTipoalimento(String tipoalimento) {
+		this.tipoalimento = tipoalimento;
 	}
-
 	
 }

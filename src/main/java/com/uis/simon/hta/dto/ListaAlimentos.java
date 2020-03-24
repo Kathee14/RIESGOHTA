@@ -6,23 +6,23 @@ public class ListaAlimentos {
 	
 	private String alimento;
 	private int calorias;
-	private String tipo_alimento;
+	private String tipoalimento;
 	
 	
 	public ListaAlimentos() {}	
 	
-	public ListaAlimentos(String alimento, int calorias, String tipo_alimento) {
+	public ListaAlimentos(String alimento, int calorias, String tipoalimento) {
 		super();
 		this.alimento = alimento;
 		this.calorias = calorias;
-		this.tipo_alimento = tipo_alimento;
+		this.tipoalimento = tipoalimento;
 	}
 	
 	
 	public ListaAlimentos(Alimento alimento) {
 		this.alimento= alimento.getAlimento();
 		this.calorias=alimento.getCalorias();
-		this.tipo_alimento=alimento.getTipo_alimento();
+		this.tipoalimento=alimento.getTipoalimento();
 	}
 	
 	
@@ -38,11 +38,11 @@ public class ListaAlimentos {
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
 	}
-	public String getTipo_alimento() {
-		return tipo_alimento;
+	public String getTipoalimento() {
+		return tipoalimento;
 	}
-	public void setTipo_alimento(String tipo_alimento) {
-		this.tipo_alimento = tipo_alimento;
+	public void setTipoalimento(String tipoalimento) {
+		this.tipoalimento = tipoalimento;
 	}
 	
 	

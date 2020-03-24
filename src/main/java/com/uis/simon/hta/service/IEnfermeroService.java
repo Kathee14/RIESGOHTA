@@ -18,6 +18,7 @@ public interface IEnfermeroService {
 	
 	public Enfermero checkUsuarioLogin(Login login);
 	
+	public void save(Enfermero enfermero);
 	
 	
 }
