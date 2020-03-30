@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,7 @@ import com.uis.simon.hta.security.JwtGenerator;
 import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
 
-@CrossOrigin
+@CrossOrigin(origins="*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
@@ -88,9 +89,16 @@ public class PacienteController {
 			
 			return new ResponseEntity<String>("El usuario con ese documento ya existe", HttpStatus.CONFLICT);
 		}
-}
+	}
 	
-	@PutMapping("/update/{cc}")
+	
+	@GetMapping(path = {"/{cc}"})
+    public Paciente listarId(@PathVariable("cc")String cc){
+        return pacienteService.findByCc(cc);
+    }
+
+	
+	@PutMapping(path = {"/{cc}"})
 	public ResponseEntity<?> updateUsuario(@PathVariable(value="cc")String cc,@RequestBody Paciente paciente){
 		Paciente pacienteDb = null;
 		pacienteDb = pacienteService.findByCc(cc);

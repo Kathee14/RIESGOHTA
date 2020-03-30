@@ -26,4 +26,5 @@ public interface IPacienteService {
 	
 	public Paciente findPaciente(NuevoPaciente nuevoPaciente);
 	
+		
 	}

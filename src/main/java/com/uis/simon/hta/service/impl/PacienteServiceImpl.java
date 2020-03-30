@@ -46,7 +46,7 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	public Paciente findByCc(String cc) {
-		return (Paciente) pacienteDao.findByCc(cc);
+		return pacienteDao.findByCc(cc);
 	}
 
 	@Override

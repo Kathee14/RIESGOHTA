@@ -35,8 +35,8 @@ public class AlimentoController {
    }
 	
 	 
-	 @GetMapping("/tipoalimento/{tipo alimento}")
-	    public ResponseEntity<?> getListaPorTipo(@PathVariable(value="tipo alimento") String tipoalimento) {
+	 @GetMapping("/tipoalimento/{tipo_alimento}")
+	    public ResponseEntity<?> getListaPorTipo(@PathVariable(value="tipo_alimento") String tipoalimento) {
 		    List<Alimento> listaportipo = (List<Alimento>) alimentoService.findAlimentoByTipoalimento(tipoalimento);
 	        List<ListaAlimentos> listaB = new ArrayList<>();
 			listaB = MapAlimento.convertirLista(listaportipo);

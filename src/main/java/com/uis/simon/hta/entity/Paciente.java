@@ -49,6 +49,7 @@ public class Paciente implements Serializable {
 	
 	@NotNull
 	@Column(name="fec_nac")
+	@Temporal(TemporalType.DATE)
 	private Date fec_nac;
 	
 	@NotBlank
