@@ -26,5 +26,6 @@ public interface IPacienteService {
 	
 	public Paciente findPaciente(NuevoPaciente nuevoPaciente);
 	
-		
+	public Paciente delete(String cc);
+	
 	}

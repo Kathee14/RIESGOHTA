@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,26 +101,20 @@ public class PacienteController {
 	
 	@PutMapping(path = {"/{cc}"})
 	public ResponseEntity<?> updateUsuario(@PathVariable(value="cc")String cc,@RequestBody Paciente paciente){
-		Paciente pacienteDb = null;
-		pacienteDb = pacienteService.findByCc(cc);
-			if (pacienteDb != null) {
-				pacienteDb.setNombre(paciente.getNombre());
-				pacienteDb.setApellido(paciente.getApellido());
-				pacienteDb.setTipo_doc(paciente.getTipo_doc());
-				pacienteDb.setCc(paciente.getCc());
-				pacienteDb.setFec_nac(paciente.getFec_nac());
-				pacienteDb.setCiudad(paciente.getCiudad());
-				pacienteDb.setDireccion(paciente.getDireccion());
-				pacienteDb.setBarrio(paciente.getBarrio());
-				pacienteDb.setSexo(paciente.getSexo());
-				pacienteDb.setEmail(paciente.getEmail());
-				pacienteDb.setCelular(paciente.getCelular());	
-				pacienteService.updateUsuario(pacienteDb);
-				return new ResponseEntity<>(pacienteDb, HttpStatus.OK);
-			} else {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-			}
-}
+				paciente.setNombre(paciente.getNombre());
+				paciente.setApellido(paciente.getApellido());
+				paciente.setTipo_doc(paciente.getTipo_doc());
+				paciente.setCc(paciente.getCc());
+				paciente.setFec_nac(paciente.getFec_nac());
+				paciente.setCiudad(paciente.getCiudad());
+				paciente.setDireccion(paciente.getDireccion());
+				paciente.setBarrio(paciente.getBarrio());
+				paciente.setSexo(paciente.getSexo());
+				paciente.setEmail(paciente.getEmail());
+				paciente.setCelular(paciente.getCelular());	
+				pacienteService.updateUsuario(paciente);
+				return new ResponseEntity<>(paciente, HttpStatus.OK);
+	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginPaciente(@Valid @RequestBody Login login,BindingResult bindingResult){
@@ -155,4 +150,11 @@ public class PacienteController {
         }
     }
 
+	@DeleteMapping(path = {"/{cc}"})
+    public ResponseEntity<?> deletePaciente (@PathVariable(value="cc")String cc){
+        pacienteService.delete(cc);
+        return new ResponseEntity<Void>(HttpStatus.MOVED_PERMANENTLY);
+    }
+
+	
 }

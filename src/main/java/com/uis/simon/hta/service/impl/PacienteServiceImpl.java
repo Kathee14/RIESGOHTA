@@ -51,7 +51,7 @@ public class PacienteServiceImpl implements IPacienteService{
 
 	@Override
 	public Paciente updateUsuario(Paciente paciente) {
-		return (Paciente)pacienteDao.save(paciente);
+		return pacienteDao.save(paciente);
 	}
 
 	@Override
@@ -68,5 +68,14 @@ public class PacienteServiceImpl implements IPacienteService{
 	public Paciente findUsuario(NuevoPaciente nuevoPaciente) {
 		return (Paciente) pacienteDao.findByCc(nuevoPaciente.getCc());
 	}
-	
-}
+
+	@Override
+	public Paciente delete(String cc) {
+		Paciente p= pacienteDao.findByCc(cc);
+        if(p!=null){
+            pacienteDao.delete(p);
+        }
+       return p;
+    }
+    
+	}
