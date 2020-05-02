@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uis.simon.hta.entity.Enfermero;
@@ -17,9 +18,10 @@ import com.uis.simon.hta.entity.Visita;
 import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
 
-@CrossOrigin
+@CrossOrigin(origins="*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/visita")
+
 public class VisitaController {
 	
 	@Autowired

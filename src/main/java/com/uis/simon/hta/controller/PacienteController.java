@@ -34,7 +34,7 @@ import com.uis.simon.hta.security.JwtGenerator;
 import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
 
-@CrossOrigin(origins="*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST})
+@CrossOrigin(origins="*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
@@ -83,7 +83,6 @@ public class PacienteController {
 			Paciente pacienteDb = pacienteService.checkUsuarioLogin(paciente);
 			JwtUser jwtUser = new JwtUser();
 			jwtUser.setCc(pacienteDb.getCc());
-			jwtUser.setPassword(pacienteDb.getPassword());
 			return new ResponseEntity<>((Collections.singletonMap("jwtToken", jwtGenerator.generate(jwtUser))),HttpStatus.CREATED);
 			
 		} else {
@@ -137,14 +136,22 @@ public class PacienteController {
 
 		if(enfermeroDb != null)  {
 			JwtUser jwtUser = new JwtUser();
+			jwtUser.setId(enfermeroDb.getId());
+			jwtUser.setNombre(enfermeroDb.getNombre());
+			jwtUser.setApellido(enfermeroDb.getApellido());
 			jwtUser.setCc(enfermeroDb.getCc());
-			jwtUser.setPassword(enfermeroDb.getPassword());
-			return new ResponseEntity<>((Collections.singletonMap("jwtToken", jwtGenerator.generate(jwtUser))),HttpStatus.OK);
+			jwtUser.setRole(ENFERMERO);
+			jwtUser.setToken(Collections.singletonMap("jwtToken",jwtGenerator.generate(jwtUser)));
+			return new ResponseEntity<>(jwtUser,HttpStatus.OK);
         } else if(pacienteDb != null){
-		JwtUser jwtUser = new JwtUser();
+		    JwtUser jwtUser = new JwtUser();
+		    jwtUser.setId(pacienteDb.getId());
+			jwtUser.setNombre(pacienteDb.getNombre());
+			jwtUser.setApellido(pacienteDb.getApellido());
 			jwtUser.setCc(pacienteDb.getCc());
-			jwtUser.setPassword(pacienteDb.getPassword());
-			return new ResponseEntity<>((Collections.singletonMap("jwtToken", jwtGenerator.generate(jwtUser))),HttpStatus.OK);
+			jwtUser.setRole(PACIENTE);
+			jwtUser.setToken(Collections.singletonMap("jwtToken",jwtGenerator.generate(jwtUser)));
+			return new ResponseEntity<>(jwtUser,HttpStatus.OK);
         } else{
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
         }
