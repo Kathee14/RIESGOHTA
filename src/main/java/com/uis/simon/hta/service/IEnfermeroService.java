@@ -20,5 +20,7 @@ public interface IEnfermeroService {
 	
 	public void save(Enfermero enfermero);
 	
+	public Enfermero findById(Long id);
+	
 	
 }

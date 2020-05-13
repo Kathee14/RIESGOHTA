@@ -3,6 +3,7 @@ package com.uis.simon.hta.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.uis.simon.hta.dto.ModificarPaciente;
 import com.uis.simon.hta.entity.Paciente;;
 
 public interface IPacienteDao extends CrudRepository<Paciente, Long> {
@@ -11,5 +12,6 @@ public interface IPacienteDao extends CrudRepository<Paciente, Long> {
 	
 	public Paciente findByCcAndPassword(String cc, String password);
 	
-
+	public ModificarPaciente save(ModificarPaciente modificarpaciente);
+	
 	}

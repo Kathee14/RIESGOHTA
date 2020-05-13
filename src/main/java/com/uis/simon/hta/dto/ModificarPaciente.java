@@ -21,8 +21,10 @@ public class ModificarPaciente {
 	private String direccion;
 
 	private String barrio;
-
+	
 	private String sexo;
+
+	private String password;
 	
 	private String email;
 
@@ -33,7 +35,7 @@ public class ModificarPaciente {
 	
 	
 	public ModificarPaciente(String nombre, String apellido, String tipo_doc, String cc, Date fec_nac, String ciudad,
-			String direccion, String barrio, String sexo, String email, Long celular) {
+			String direccion, String barrio, String password,  String sexo, String email, Long celular) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -43,6 +45,7 @@ public class ModificarPaciente {
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		this.barrio = barrio;
+		this.password = password;
 		this.sexo = sexo;
 		this.email = email;
 		this.celular = celular;
@@ -57,6 +60,7 @@ public class ModificarPaciente {
 		this.ciudad=paciente.getCiudad();
 		this.direccion=paciente.getDireccion();
 		this.barrio=paciente.getBarrio();
+		this.password=paciente.getPassword();
 		this.sexo=paciente.getSexo();
 		this.email=paciente.getEmail();
 		this.celular=paciente.getCelular();		
@@ -134,6 +138,16 @@ public class ModificarPaciente {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	public String getEmail() {
 		return email;

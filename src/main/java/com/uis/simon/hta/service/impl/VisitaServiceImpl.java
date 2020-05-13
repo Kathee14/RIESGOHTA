@@ -33,8 +33,8 @@ public class VisitaServiceImpl implements IVisitaService {
 	}
 
 	@Override
-	public Visita findVisitaByEnfermero(Enfermero enfermero) {
-	return visitaDao.findVisitaByEnfermero(enfermero);
+	public Visita findVisitaByEnfermero(Long id) {
+	return (Visita)visitaDao.findVisitaByEnfermero(id);
 	}
 
 	@Override
@@ -43,6 +43,14 @@ public class VisitaServiceImpl implements IVisitaService {
 		return (List<Visita>) visitaDao.findAll();
 	}
 
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Visita> findByEnfermero(Long id) {
+		@SuppressWarnings("unchecked")
+		List<Visita> findVisitaByEnfermero = (List<Visita>) visitaDao.findVisitaByEnfermero(id);
+		return findVisitaByEnfermero;
+	}
 
 
 }

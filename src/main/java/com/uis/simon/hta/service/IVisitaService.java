@@ -14,7 +14,9 @@ public interface IVisitaService {
 	
 	public Visita findVisitaByPaciente(Paciente paciente);
 	
-	public Visita findVisitaByEnfermero(Enfermero enfermero);
+	public Visita findVisitaByEnfermero(Long id);
+
+	List<Visita> findByEnfermero(Long id);
 	
 
 }

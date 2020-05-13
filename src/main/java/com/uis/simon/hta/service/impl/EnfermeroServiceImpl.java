@@ -32,7 +32,7 @@ public class EnfermeroServiceImpl implements IEnfermeroService {
 
 	@Override
 	public Enfermero findByCc(String cc) {
-		return enfermeroDao.findByCc(cc);
+		return (Enfermero)enfermeroDao.findByCc(cc);
 	}
 
 	@Override
@@ -50,6 +50,11 @@ public class EnfermeroServiceImpl implements IEnfermeroService {
 	public void save(Enfermero enfermero) {
 		enfermeroDao.save(enfermero);
 		
+	}
+
+	@Override
+	public Enfermero findById(Long id) {
+		return (Enfermero)findById(id);
 	}
 	
 }

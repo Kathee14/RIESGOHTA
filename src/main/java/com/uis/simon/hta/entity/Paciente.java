@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 @Entity
@@ -64,7 +65,6 @@ public class Paciente implements Serializable {
 	@Column(name="barrio")
 	private String barrio;
 	
-	@NotBlank
 	@Column(name="password")
 	private String password;
 	
@@ -89,8 +89,8 @@ public class Paciente implements Serializable {
 		createAt = new Date();
 	}
 	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
-	private Set<Enfermero> enfermeros;
+	@OneToMany(mappedBy = "paciente")
+	private Set<Visita> visitas;
 	
 	public Paciente() {}
 
@@ -225,12 +225,16 @@ public class Paciente implements Serializable {
 		this.createAt = createAt;
 	}
 
-	public Set<Enfermero> getEnfermeros() {
-		return enfermeros;
-	}
+	//public Set<Visita> getVisitas() {
+		//return visitas;
+	//}
 
-	public void setEnfermeros(Set<Enfermero> enfermeros) {
-		this.enfermeros = enfermeros;
+	public void setVisitas(Set<Visita> visitas) {
+		this.visitas = visitas;
 	}
 	
-}
+	public void addVvisita(Visita enfermero) {
+		this.visitas.add(enfermero);
+	}
+	}
+

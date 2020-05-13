@@ -48,12 +48,8 @@ public class PacienteServiceImpl implements IPacienteService{
 	public Paciente findByCc(String cc) {
 		return pacienteDao.findByCc(cc);
 	}
-
-	@Override
-	public Paciente updateUsuario(Paciente paciente) {
-		return pacienteDao.save(paciente);
-	}
-
+	
+	
 	@Override
 	public Paciente findUsuario(Paciente paciente) {
 		return (Paciente) pacienteDao.findByCc(paciente.getCc());
@@ -77,5 +73,17 @@ public class PacienteServiceImpl implements IPacienteService{
         }
        return p;
     }
+
+	@Override
+	public Paciente findById(Long id) {
+		return (Paciente)pacienteDao.findById(id).orElse(null);
+	} 
+
+	@Override
+	public Paciente update(Paciente paciente) {
+		return pacienteDao.save(paciente);
+	}
+
+	
     
 	}

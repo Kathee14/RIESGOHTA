@@ -1,5 +1,6 @@
 package com.uis.simon.hta.dto;
 
+
 import java.util.Map;
 
 public class JwtUser {

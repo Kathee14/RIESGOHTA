@@ -3,6 +3,7 @@ package com.uis.simon.hta.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -23,15 +27,16 @@ public class Visita implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	@Column(name ="id")
+	private Long id;  
 	
-    @ManyToOne
-    @JoinColumn
-	private Paciente paciente;
-	
-    @ManyToOne
-    @JoinColumn
+	@ManyToOne
+    @JoinColumn(name= "enfermero_id")
 	private Enfermero enfermero;
+	
+	@ManyToOne
+    @JoinColumn(name="paciente_id")
+	private Paciente paciente;
 	
 	@Column(name= "create_at")
 	@Temporal(TemporalType.DATE)
@@ -50,20 +55,28 @@ public class Visita implements Serializable {
 	
 	public Visita () {}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
+	public Visita(Enfermero enfermero, Paciente paciente, String observaciones, String comentarios) {
+		super();
+		this.enfermero = enfermero;
 		this.paciente = paciente;
+		this.observaciones = observaciones;
+		this.comentarios = comentarios;
 	}
-
+	
 	public Enfermero getEnfermero() {
 		return enfermero;
 	}
 
 	public void setEnfermero(Enfermero enfermero) {
 		this.enfermero = enfermero;
+		
+	}
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public Date getCreateAt() {

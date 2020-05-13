@@ -10,6 +10,6 @@ public interface IVisitaDao extends CrudRepository<Visita, Long>{
 
 	public Visita findVisitaByPaciente(Paciente paciente);
 	
-	public Visita findVisitaByEnfermero(Enfermero enfermero);	
+	public Visita findVisitaByEnfermero(Long id);	
 	
 }

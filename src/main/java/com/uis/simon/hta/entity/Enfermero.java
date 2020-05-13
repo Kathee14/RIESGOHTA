@@ -10,16 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 
 @Entity
 @Table(name="enfermero")
@@ -43,12 +38,8 @@ public class Enfermero implements Serializable {
 	@Column(name="password")
 	private String password;
 	
-	@ManyToMany
-	@JsonBackReference
-    @JoinTable(name = "visita", 
-    	joinColumns = @JoinColumn(name = "enfermero_id", referencedColumnName = "id"), 
-    	inverseJoinColumns = @JoinColumn(name = "paciente_id", referencedColumnName = "id" ))
-    private Set<Paciente> paciente = new HashSet<>();
+	@OneToMany(mappedBy = "enfermero")
+	Set<Visita> visitas  = new HashSet<>();
 	
 	@Column(name= "create_at")
 	@Temporal(TemporalType.DATE)
@@ -107,17 +98,17 @@ public class Enfermero implements Serializable {
 		this.createAt = createAt;
 	}
 
-	public Set<Paciente> getPaciente() {
-		return paciente;
+	//public Set<Visita> getVisitas() {
+		//return visitas;
+	//}
+
+	public void setVisitas(Set<Visita> visitas) {
+		this.visitas = visitas;
 	}
 
-	public void setPaciente(Set<Paciente> paciente) {
-		this.paciente = paciente;
-	}
+	public void addVisita(Visita visitas) {
+		  this.visitas.add(visitas);
+			
+		}
 
-	public void addVisita(Paciente paciente) {
-	  this.paciente.add(paciente);
-		
-	}
-	
 }

@@ -91,29 +91,31 @@ public class PacienteController {
 		}
 	}
 	
-	
 	@GetMapping(path = {"/{cc}"})
     public Paciente listarId(@PathVariable("cc")String cc){
         return pacienteService.findByCc(cc);
     }
-
 	
-	@PutMapping(path = {"/{cc}"})
-	public ResponseEntity<?> updateUsuario(@PathVariable(value="cc")String cc,@RequestBody Paciente paciente){
-				paciente.setNombre(paciente.getNombre());
-				paciente.setApellido(paciente.getApellido());
-				paciente.setTipo_doc(paciente.getTipo_doc());
-				paciente.setCc(paciente.getCc());
-				paciente.setFec_nac(paciente.getFec_nac());
-				paciente.setCiudad(paciente.getCiudad());
-				paciente.setDireccion(paciente.getDireccion());
-				paciente.setBarrio(paciente.getBarrio());
-				paciente.setSexo(paciente.getSexo());
-				paciente.setEmail(paciente.getEmail());
-				paciente.setCelular(paciente.getCelular());	
-				pacienteService.updateUsuario(paciente);
+	
+
+	@PutMapping(path = {"/{id}"})
+	public ResponseEntity<?> updateUsuario(@PathVariable(value="id")Long id,@RequestBody ModificarPaciente modificarPaciente){
+		Paciente paciente = pacienteService.findById(id);
+				paciente.setNombre(modificarPaciente.getNombre());
+				paciente.setApellido(modificarPaciente.getApellido());
+				paciente.setTipo_doc(modificarPaciente.getTipo_doc());
+				paciente.setCc(modificarPaciente.getCc());
+				paciente.setFec_nac(modificarPaciente.getFec_nac());
+				paciente.setCiudad(modificarPaciente.getCiudad());
+				paciente.setDireccion(modificarPaciente.getDireccion());
+				paciente.setBarrio(modificarPaciente.getBarrio());
+				paciente.setPassword(modificarPaciente.getPassword());
+				paciente.setEmail(modificarPaciente.getEmail());
+				paciente.setCelular(modificarPaciente.getCelular());	
+				pacienteService.update(paciente);
 				return new ResponseEntity<>(paciente, HttpStatus.OK);
-	}
+		}
+		
 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginPaciente(@Valid @RequestBody Login login,BindingResult bindingResult){

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.uis.simon.hta.dto.NuevoPaciente;
 import com.uis.simon.hta.entity.Paciente;
-import com.uis.simon.hta.dto.Login;;
+import com.uis.simon.hta.dto.Login;
 
 public interface IPacienteService {
 	
@@ -18,7 +18,9 @@ public interface IPacienteService {
 	
 	public Paciente findByCc(String cc);
 	
-	public Paciente updateUsuario(Paciente paciente);
+	public Paciente findById(Long id);
+	
+	public Paciente update(Paciente paciente);
 
 	public Paciente checkUsuarioLogin(Paciente paciente);
 	
