@@ -1,9 +1,8 @@
 package com.uis.simon.hta.service;
 
+import java.util.Collection;
 import java.util.List;
 
-import com.uis.simon.hta.entity.Enfermero;
-import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Visita;
 
 public interface IVisitaService {
@@ -12,11 +11,8 @@ public interface IVisitaService {
 	
 	public void saveVisita(Visita visita);
 	
-	public Visita findVisitaByPaciente(Paciente paciente);
+	Collection<Visita> findAllVisitasByEnfermero(Long enfermero_id);
 	
-	public Visita findVisitaByEnfermero(Long id);
-
-	List<Visita> findByEnfermero(Long id);
-	
+	Collection<Visita> findAllVisitasByPaciente(Long paciente_id);
 
 }

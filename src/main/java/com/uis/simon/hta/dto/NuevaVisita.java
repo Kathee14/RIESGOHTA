@@ -2,13 +2,6 @@ package com.uis.simon.hta.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.uis.simon.hta.entity.Enfermero;
-import com.uis.simon.hta.entity.Paciente;
-
 public class NuevaVisita {
 
 	private String paciente;

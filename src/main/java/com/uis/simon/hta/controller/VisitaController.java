@@ -17,17 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uis.simon.hta.dto.ListaAlimentos;
-import com.uis.simon.hta.dto.ListaVisitas;
-import com.uis.simon.hta.dto.ModificarPaciente;
+import com.uis.simon.hta.dto.ListaVisitasE;
+import com.uis.simon.hta.dto.ListaVisitasP;
 import com.uis.simon.hta.dto.NuevaVisita;
-import com.uis.simon.hta.entity.Alimento;
 import com.uis.simon.hta.entity.Enfermero;
 import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Visita;
-import com.uis.simon.hta.mapper.MapAlimento;
-import com.uis.simon.hta.mapper.MapPaciente;
-import com.uis.simon.hta.mapper.MapVisita;
+import com.uis.simon.hta.mapper.MapVisitaE;
+import com.uis.simon.hta.mapper.MapVisitaP;
 import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
 import com.uis.simon.hta.service.IVisitaService;
@@ -53,21 +50,31 @@ public class VisitaController {
 		return visitaService.findAll();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@GetMapping("/visi/{id}")
-    public ResponseEntity<?> getListaVisitaEnfermero(@PathVariable(value="id") Long id) {	
-		List<Visita> listaporenf = (List<Visita>) visitaService.findVisitaByEnfermero(id);
-		if(listaporenf != null) {
-			List<ListaVisitas> listaB = new ArrayList<>();
-			listaB = MapVisita.convertirLista( listaporenf);
-	        return new ResponseEntity<>(listaB, HttpStatus.OK);
-		} else
-		{
+	@GetMapping("/listaporenfermero/{id}")
+	public ResponseEntity<?> listaVisitaEnfermero(@PathVariable(name = "id")Long enfermero_id){
+	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByEnfermero(enfermero_id);
+		 if(visitaDb != null) {
+			 	List<ListaVisitasE> listaVisitas = new ArrayList<>();
+				listaVisitas = MapVisitaE.convertirLista(visitaDb);
+		      return new ResponseEntity<>(listaVisitas, HttpStatus.OK);
+	   } else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-			
+	 }
+	
+	@GetMapping("/listaporpaciente/{id}")
+	public ResponseEntity<?> listaVisitaPaciente(@PathVariable(name = "id")Long paciente_id){
+	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByPaciente(paciente_id);
+		 if(visitaDb != null) {
+			 	List<ListaVisitasP> listaVisitas = new ArrayList<>();
+				listaVisitas = MapVisitaP.convertirLista(visitaDb);
+		      return new ResponseEntity<>(listaVisitas, HttpStatus.OK);
+	   } else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
+	 }
+	
+	
 	@PostMapping("/save_visita")
 	public ResponseEntity<?> saveVisita(@RequestBody NuevaVisita nuevaVisita){
 	Enfermero enfermero = enfermeroService.findByCc(nuevaVisita.getEnfermero());

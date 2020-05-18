@@ -2,11 +2,12 @@ package com.uis.simon.hta.dto;
 
 import java.util.Date;
 
+import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Visita;
 
-public class ListaVisitas {
+public class ListaVisitasE {
 
-	private String cc_paciente;
+	private Paciente paciente;
 	
 	private String comentarios;
 	
@@ -14,31 +15,30 @@ public class ListaVisitas {
 	
 	private Date create_at;
 	
-    public ListaVisitas() {}
-	
-	public ListaVisitas(String cc_paciente, String comentarios, String observaciones,
-			Date create_at) {
+    public ListaVisitasE() {}
+
+	public ListaVisitasE(Paciente paciente, String comentarios, String observaciones, Date create_at) {
 		super();
-		this.cc_paciente = cc_paciente;
+		this.paciente = paciente;
 		this.comentarios = comentarios;
 		this.observaciones = observaciones;
 		this.create_at = create_at;
 	}
 
-	public ListaVisitas(Visita visita) {
+	public ListaVisitasE(Visita visita) {
 		
-		this.cc_paciente=visita.getPaciente().getCc();
+		this.paciente=visita.getPaciente();
 		this.comentarios=visita.getComentarios();
 		this.observaciones=visita.getObservaciones();
 		this.create_at=visita.getCreateAt();
 	}
-	
-	public String getCc_paciente() {
-		return cc_paciente;
+
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setCc_paciente(String cc_paciente) {
-		this.cc_paciente = cc_paciente;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public String getComentarios() {

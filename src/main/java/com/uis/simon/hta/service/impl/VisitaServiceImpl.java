@@ -1,5 +1,6 @@
 package com.uis.simon.hta.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -8,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uis.simon.hta.dao.IVisitaDao;
-import com.uis.simon.hta.entity.Enfermero;
-import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Visita;
 import com.uis.simon.hta.service.IVisitaService;
 
@@ -28,29 +27,17 @@ public class VisitaServiceImpl implements IVisitaService {
 	}
 
 	@Override
-	public Visita findVisitaByPaciente(Paciente paciente) {
-		return visitaDao.findVisitaByPaciente(paciente);
-	}
-
-	@Override
-	public Visita findVisitaByEnfermero(Long id) {
-	return (Visita)visitaDao.findVisitaByEnfermero(id);
-	}
-
-	@Override
 	@Transactional(readOnly = true)
 	public List<Visita> findAll() {
 		return (List<Visita>) visitaDao.findAll();
 	}
 
-
 	@Override
-	@Transactional(readOnly = true)
-	public List<Visita> findByEnfermero(Long id) {
-		@SuppressWarnings("unchecked")
-		List<Visita> findVisitaByEnfermero = (List<Visita>) visitaDao.findVisitaByEnfermero(id);
-		return findVisitaByEnfermero;
+	public Collection<Visita> findAllVisitasByEnfermero(Long enfermero_id) {
+		return visitaDao.findAllVisitasByEnfermero(enfermero_id);
 	}
 
-
+	@Override
+	public Collection<Visita> findAllVisitasByPaciente(Long paciente_id) {
+		return visitaDao.findAllVisitasByPaciente(paciente_id);	}
 }
