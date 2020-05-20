@@ -28,11 +28,11 @@ public class Visita implements Serializable {
 	private Long id;  
 	
 	@ManyToOne
-    @JoinColumn(name= "enfermero_id")
+    @JoinColumn(name= "enfermero")
 	private Enfermero enfermero;
 	
-	@ManyToOne
-    @JoinColumn(name="paciente_id")
+	@ManyToOne 
+    @JoinColumn(name="paciente")
 	private Paciente paciente;
 	
 	@Column(name= "create_at")

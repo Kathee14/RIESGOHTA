@@ -11,8 +11,8 @@ public interface IVisitaService {
 	
 	public void saveVisita(Visita visita);
 	
-	Collection<Visita> findAllVisitasByEnfermero(Long enfermero_id);
+	Collection<Visita> findAllVisitasByEnfermero(Long enfermero);
 	
-	Collection<Visita> findAllVisitasByPaciente(Long paciente_id);
+	Collection<Visita> findAllVisitasByPaciente(Long paciente);
 
 }

@@ -33,11 +33,11 @@ public class VisitaServiceImpl implements IVisitaService {
 	}
 
 	@Override
-	public Collection<Visita> findAllVisitasByEnfermero(Long enfermero_id) {
-		return visitaDao.findAllVisitasByEnfermero(enfermero_id);
+	public Collection<Visita> findAllVisitasByEnfermero(Long enfermero) {
+		return visitaDao.findAllVisitasByEnfermero(enfermero);
 	}
 
 	@Override
-	public Collection<Visita> findAllVisitasByPaciente(Long paciente_id) {
-		return visitaDao.findAllVisitasByPaciente(paciente_id);	}
+	public Collection<Visita> findAllVisitasByPaciente(Long paciente) {
+		return visitaDao.findAllVisitasByPaciente(paciente);	}
 }

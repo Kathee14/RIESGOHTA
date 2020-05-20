@@ -51,8 +51,8 @@ public class VisitaController {
 	}
 	
 	@GetMapping("/listaporenfermero/{id}")
-	public ResponseEntity<?> listaVisitaEnfermero(@PathVariable(name = "id")Long enfermero_id){
-	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByEnfermero(enfermero_id);
+	public ResponseEntity<?> listaVisitaEnfermero(@PathVariable(name = "id")Long enfermero){
+	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByEnfermero(enfermero);
 		 if(visitaDb != null) {
 			 	List<ListaVisitasE> listaVisitas = new ArrayList<>();
 				listaVisitas = MapVisitaE.convertirLista(visitaDb);
@@ -63,8 +63,8 @@ public class VisitaController {
 	 }
 	
 	@GetMapping("/listaporpaciente/{id}")
-	public ResponseEntity<?> listaVisitaPaciente(@PathVariable(name = "id")Long paciente_id){
-	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByPaciente(paciente_id);
+	public ResponseEntity<?> listaVisitaPaciente(@PathVariable(name = "id")Long paciente){
+	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByPaciente(paciente);
 		 if(visitaDb != null) {
 			 	List<ListaVisitasP> listaVisitas = new ArrayList<>();
 				listaVisitas = MapVisitaP.convertirLista(visitaDb);
