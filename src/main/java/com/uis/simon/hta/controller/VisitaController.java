@@ -75,7 +75,7 @@ public class VisitaController {
 	 }
 	
 	
-	@PostMapping("/save_visita")
+	@PostMapping("/guardarVisita")
 	public ResponseEntity<?> saveVisita(@RequestBody NuevaVisita nuevaVisita){
 	Enfermero enfermero = enfermeroService.findByCc(nuevaVisita.getEnfermero());
 		Paciente paciente = pacienteService.findByCc(nuevaVisita.getPaciente());
