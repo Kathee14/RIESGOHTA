@@ -32,7 +32,6 @@ import com.uis.simon.hta.service.IVisitaService;
 @CrossOrigin(origins="*", methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/visita")
-
 public class VisitaController {
 	
 	@Autowired

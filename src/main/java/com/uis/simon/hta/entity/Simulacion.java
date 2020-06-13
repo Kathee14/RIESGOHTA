@@ -2,13 +2,13 @@ package com.uis.simon.hta.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -23,32 +23,33 @@ public class Simulacion {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="altura")
-	private float altura;
+	@ManyToOne
+	@JoinColumn(name= "paciente")
+	private Paciente paciente;
 	
-	@Column(name="sexo")
-	private int sexo;
+	@Column(name="altura")
+	private double altura;
+	
+	@Column(name="edad")
+	private int edad;
 	
 	@Column(name="peso")
 	private double peso;
-	
-	@Column(name="herencia")
-	private int herencia;
-	
-	@Column(name="fumar")
-	private int fumar;
 	
 	@Column(name="sbp")
 	private int sbp;
 	
 	@Column(name="dbp")
 	private int dbp;
+		
+	@Column(name="herencia")
+	private int herencia;
 	
-	@Column(name="acuerdo")
-	private String acuerdo;
-
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Paciente paciente;
+	@Column(name="fumar")
+	private int fumar;
+	
+	@Column(name="calorias")
+	private double calorias;
 	
 	@Column(name= "create_at")
 	@Temporal(TemporalType.DATE)
@@ -59,6 +60,40 @@ public class Simulacion {
 		createAt = new Date();
 	}
 
+	public Simulacion() {}
+	
+
+	public Simulacion(double altura, double peso, double calorias) {
+		super();
+		this.altura = altura;
+		this.peso = peso;
+		this.calorias = calorias;
+	}
+	
+	public Simulacion(int edad, int sbp, int dbp, int herencia, int fumar) {
+		super();
+		this.edad = edad;
+		this.sbp = sbp;
+		this.dbp = dbp;
+		this.herencia = herencia;
+		this.fumar = fumar;
+	}
+
+	public Simulacion(Paciente paciente, double altura, int edad, double peso, int sbp, int dbp, int herencia, int fumar,
+			double calorias) {
+		super();
+		this.paciente = paciente;
+		this.altura = altura;
+		this.edad = edad;
+		this.peso = peso;
+		this.sbp = sbp;
+		this.dbp = dbp;
+		this.herencia = herencia;
+		this.fumar = fumar;
+		this.calorias = calorias;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -67,21 +102,33 @@ public class Simulacion {
 		this.id = id;
 	}
 
-	public float getAltura() {
+	public double getAltura() {
 		return altura;
 	}
 
-	public void setAltura(float altura) {
+	public void setAltura(double altura) {
 		this.altura = altura;
 	}
 
-	public int getSexo() {
-		return sexo;
+	public int getEdad() {
+		return edad;
 	}
 
-	public void setSexo(int sexo) {
-		this.sexo = sexo;
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
+
+
+	public double getCalorias() {
+		return calorias;
+	}
+
+
+	public void setCalorias(double calorias) {
+		this.calorias = calorias;
+	}
+
 
 	public double getPeso() {
 		return peso;
@@ -121,14 +168,6 @@ public class Simulacion {
 
 	public void setDbp(int dbp) {
 		this.dbp = dbp;
-	}
-
-	public String getAcuerdo() {
-		return acuerdo;
-	}
-
-	public void setAcuerdo(String acuerdo) {
-		this.acuerdo = acuerdo;
 	}
 
 	public Date getCreateAt() {
