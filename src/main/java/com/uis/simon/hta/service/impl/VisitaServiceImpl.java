@@ -42,18 +42,8 @@ public class VisitaServiceImpl implements IVisitaService {
 			for (Visita a: v) {
 				Pacientes pacientes = new Pacientes(a.getPaciente().getNombre(),
 													a.getPaciente().getApellido(),
-													a.getPaciente().getTipo_doc(),
-													a.getPaciente().getCc(),
-													a.getPaciente().getFec_nac(),
-													a.getPaciente().getCiudad(),
-													a.getPaciente().getDireccion(),
-													a.getPaciente().getBarrio(),
-													a.getPaciente().getSexo(),
-													a.getPaciente().getEmail(),
-													a.getPaciente().getCelular(),
-													a.getPaciente().getCreateAt()
-													);
-				lista.add(pacientes);
+													a.getPaciente().getCc())
+;				lista.add(pacientes);
 			}
 		return lista;
 	}
