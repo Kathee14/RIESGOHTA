@@ -8,6 +8,7 @@ public class HtaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HtaApplication.class, args);
+	
 	}
 
 }

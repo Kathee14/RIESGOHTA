@@ -111,6 +111,8 @@ public class Paciente implements Serializable {
 	}
 
 
+	public Paciente(Paciente paciente) {}
+
 	public Long getId() {
 		return id;
 	}

@@ -1,20 +1,23 @@
 package com.uis.simon.hta.dto;
 
-import java.util.Date;
+import java.util.ArrayList;
 
-import com.uis.simon.hta.entity.Enfermero;
-import com.uis.simon.hta.entity.Visita;
-
-public class ListaVisitasP {
+public class NuevaSimulacionEnfermero {
 	
-	private Enfermero enfermero;
+	private String enfermero;
+	
+	private String paciente;
+	
+	private int sexo;
 	
 	private double altura;
+
+	private int edad;
 
 	private double peso;
 
 	private int sbp;
-	
+
 	private int dbp;
 	
 	private int herencia;
@@ -30,6 +33,8 @@ public class ListaVisitasP {
 	private int semanaC;
 
 	private int calorias;
+
+	private ArrayList<ActividadFront> actividades;
 	
 	private String recomendaciones;
 	
@@ -46,230 +51,245 @@ public class ListaVisitasP {
 	private String alimentacion;
 	
 	private String ejercicio;
-	
-	private Date create_at;
-	
-	
-	public ListaVisitasP() {}
 
-	public ListaVisitasP(Enfermero enfermero, double altura, double peso, int sbp, int dbp,
-			int herencia, int fumar, int semanaF, int upDown, int upDownCalorias, int semanaC, int calorias,
-			String recomendaciones, String observaciones, String diabetes, String alcohol, String estres, String dieta,
-			String alimentacion, String ejercicio, Date create_at) {
-		super();
-		this.enfermero = enfermero;
-		this.altura = altura;
-		this.peso = peso;
-		this.sbp = sbp;
-		this.dbp = dbp;
-		this.herencia = herencia;
-		this.fumar = fumar;
-		this.semanaF = semanaF;
-		this.upDown = upDown;
-		this.upDownCalorias = upDownCalorias;
-		this.semanaC = semanaC;
-		this.calorias = calorias;
-		this.recomendaciones = recomendaciones;
-		this.observaciones = observaciones;
-		this.diabetes = diabetes;
-		this.alcohol = alcohol;
-		this.estres = estres;
-		this.dieta = dieta;
-		this.alimentacion = alimentacion;
-		this.ejercicio = ejercicio;
-		this.create_at = create_at;
+	public NuevaSimulacionEnfermero() {}
+
+	public String getPaciente() {
+		return paciente;
 	}
 
-	public ListaVisitasP(Visita visita) {
-		
-		this.enfermero = visita.getEnfermero();
-		this.altura = visita.getAltura();
-		this.peso = visita.getPeso();
-		this.sbp = visita.getSbp();
-		this.dbp = visita.getDbp();
-		this.herencia = visita.getHerencia();
-		this.fumar = visita.getFumar();
-		this.semanaF = visita.getSemanaF();
-		this.upDown = visita.getUpDown();
-		this.upDownCalorias = visita.getUpDownCalorias();
-		this.semanaC = visita.getSemanaC();
-		this.recomendaciones = visita.getRecomendaciones();
-		this.observaciones = visita.getObservaciones();
-		this.diabetes = visita.getDiabetes();
-		this.alcohol = visita.getAlcohol();
-		this.estres = visita.getEstres();
-		this.dieta = visita.getDieta();
-		this.alimentacion = visita.getAlimentacion();
-		this.ejercicio = visita.getEjercicio();
-		this.create_at = visita.getCreateAt();
+
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
 	}
 
-	public Enfermero getEnfermero() {
+	public String getEnfermero() {
 		return enfermero;
 	}
 
-	public void setEnfermero(Enfermero enfermero) {
+
+	public void setEnfermero(String enfermero) {
 		this.enfermero = enfermero;
 	}
+
+
+	public int getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(int sexo) {
+		this.sexo = sexo;
+	}
+
 
 	public double getAltura() {
 		return altura;
 	}
 
+
 	public void setAltura(double altura) {
 		this.altura = altura;
 	}
+
+
+	public int getEdad() {
+		return edad;
+	}
+
+
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+
 
 	public double getPeso() {
 		return peso;
 	}
 
+
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public int getSbp() {
 		return sbp;
 	}
 
+
 	public void setSbp(int sbp) {
 		this.sbp = sbp;
 	}
+
 
 	public int getDbp() {
 		return dbp;
 	}
 
+
 	public void setDbp(int dbp) {
 		this.dbp = dbp;
 	}
+
 
 	public int getHerencia() {
 		return herencia;
 	}
 
+
 	public void setHerencia(int herencia) {
 		this.herencia = herencia;
 	}
+
 
 	public int getFumar() {
 		return fumar;
 	}
 
+
 	public void setFumar(int fumar) {
 		this.fumar = fumar;
 	}
+
 
 	public int getSemanaF() {
 		return semanaF;
 	}
 
+
 	public void setSemanaF(int semanaF) {
 		this.semanaF = semanaF;
 	}
+
 
 	public int getUpDown() {
 		return upDown;
 	}
 
+
 	public void setUpDown(int upDown) {
 		this.upDown = upDown;
 	}
+
 
 	public int getUpDownCalorias() {
 		return upDownCalorias;
 	}
 
+
 	public void setUpDownCalorias(int upDownCalorias) {
 		this.upDownCalorias = upDownCalorias;
 	}
+
 
 	public int getSemanaC() {
 		return semanaC;
 	}
 
+
 	public void setSemanaC(int semanaC) {
 		this.semanaC = semanaC;
 	}
+
 
 	public int getCalorias() {
 		return calorias;
 	}
 
+
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
 	}
+
+
+	public ArrayList<ActividadFront> getActividades() {
+		return actividades;
+	}
+
+
+	public void setActividades(ArrayList<ActividadFront> actividades) {
+		this.actividades = actividades;
+	}
+
 
 	public String getRecomendaciones() {
 		return recomendaciones;
 	}
 
+
 	public void setRecomendaciones(String recomendaciones) {
 		this.recomendaciones = recomendaciones;
 	}
+
 
 	public String getObservaciones() {
 		return observaciones;
 	}
 
+
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public String getDiabetes() {
 		return diabetes;
 	}
 
+
 	public void setDiabetes(String diabetes) {
 		this.diabetes = diabetes;
 	}
+
 
 	public String getAlcohol() {
 		return alcohol;
 	}
 
+
 	public void setAlcohol(String alcohol) {
 		this.alcohol = alcohol;
 	}
+
 
 	public String getEstres() {
 		return estres;
 	}
 
+
 	public void setEstres(String estres) {
 		this.estres = estres;
 	}
+
 
 	public String getDieta() {
 		return dieta;
 	}
 
+
 	public void setDieta(String dieta) {
 		this.dieta = dieta;
 	}
+
 
 	public String getAlimentacion() {
 		return alimentacion;
 	}
 
+
 	public void setAlimentacion(String alimentacion) {
 		this.alimentacion = alimentacion;
 	}
+
 
 	public String getEjercicio() {
 		return ejercicio;
 	}
 
+
 	public void setEjercicio(String ejercicio) {
 		this.ejercicio = ejercicio;
-	}
-
-	public Date getCreate_at() {
-		return create_at;
-	}
-
-	public void setCreate_at(Date create_at) {
-		this.create_at = create_at;
 	}
 
 }

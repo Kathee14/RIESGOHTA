@@ -61,7 +61,13 @@ public class Simulacion {
 	}
 
 	public Simulacion() {}
-	
+
+	public Simulacion(int edad, int sbp, int dbp) {
+		super();
+		this.edad = edad;
+		this.sbp = sbp;
+		this.dbp = dbp;
+	}
 
 	public Simulacion(double altura, double peso, double calorias) {
 		super();

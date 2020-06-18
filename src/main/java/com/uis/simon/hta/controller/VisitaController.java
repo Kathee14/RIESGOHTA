@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uis.simon.hta.dto.EnfermeroPaciente;
+import com.uis.simon.hta.dto.Enfermeros;
 import com.uis.simon.hta.dto.ListaVisitasE;
 import com.uis.simon.hta.dto.ListaVisitasP;
-import com.uis.simon.hta.dto.NuevaVisita;
+import com.uis.simon.hta.dto.NuevaSimulacionEnfermero;
+import com.uis.simon.hta.dto.Pacientes;
 import com.uis.simon.hta.entity.Enfermero;
 import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Visita;
@@ -49,8 +52,20 @@ public class VisitaController {
 		return visitaService.findAll();
 	}
 	
-	@GetMapping("/listaporenfermero/{id}")
+	@GetMapping("/listaPAporenfermero/{id}")
 	public ResponseEntity<?> listaVisitaEnfermero(@PathVariable(name = "id")Long enfermero){
+		List<Pacientes> visitaDb =  visitaService.findAllPacientesByEnfermero(enfermero);
+	return new ResponseEntity<>(visitaDb, HttpStatus.OK) ;
+	}
+	
+	@GetMapping("/listaENporpaciente/{id}")
+	public ResponseEntity<?> listaPaciente(@PathVariable(name = "id")Long paciente){
+		List<Enfermeros> visitaDb =  visitaService.findAllEnfermerosByPaciento(paciente);
+	return new ResponseEntity<>(visitaDb, HttpStatus.OK) ;
+	}
+
+	@GetMapping("/listaporenfermero/{id}")
+	public ResponseEntity<?> listaEnfermero(@PathVariable(name = "id")Long enfermero){
 	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByEnfermero(enfermero);
 		 if(visitaDb != null) {
 			 	List<ListaVisitasE> listaVisitas = new ArrayList<>();
@@ -62,7 +77,7 @@ public class VisitaController {
 	 }
 	
 	@GetMapping("/listaporpaciente/{id}")
-	public ResponseEntity<?> listaVisitaPaciente(@PathVariable(name = "id")Long paciente){
+	public ResponseEntity<?> listaVisitasPaciente(@PathVariable(name = "id")Long paciente){
 	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByPaciente(paciente);
 		 if(visitaDb != null) {
 			 	List<ListaVisitasP> listaVisitas = new ArrayList<>();
@@ -74,19 +89,37 @@ public class VisitaController {
 	 }
 	
 	
+	
 	@PostMapping("/guardarVisita")
-	public ResponseEntity<?> saveVisita(@RequestBody NuevaVisita nuevaVisita){
+	public ResponseEntity<?> saveVisita(@RequestBody NuevaSimulacionEnfermero nuevaVisita){
 	Enfermero enfermero = enfermeroService.findByCc(nuevaVisita.getEnfermero());
 		Paciente paciente = pacienteService.findByCc(nuevaVisita.getPaciente());
 		if (paciente != null) {
 		Visita visita = new Visita();
 		visita.setEnfermero(enfermero);
 		visita.setPaciente(paciente);
-		visita.setComentarios(nuevaVisita.getComentarios());
+		visita.setAltura(nuevaVisita.getAltura());
+		visita.setPeso(nuevaVisita.getPeso());
+		visita.setSbp(nuevaVisita.getSbp());
+		visita.setDbp(nuevaVisita.getDbp());
+		visita.setHerencia(nuevaVisita.getHerencia());
+		visita.setSemanaF(nuevaVisita.getSemanaF());
+		visita.setUpDown(nuevaVisita.getUpDown());
+		visita.setUpDownCalorias(nuevaVisita.getUpDownCalorias());
+		visita.setSemanaC(nuevaVisita.getSemanaC());
+		visita.setCalorias(nuevaVisita.getCalorias());
+		visita.setRecomendaciones(nuevaVisita.getRecomendaciones());
 		visita.setObservaciones(nuevaVisita.getObservaciones());
+		visita.setDiabetes(nuevaVisita.getDiabetes());
+		visita.setAlcohol(nuevaVisita.getAlcohol());
+		visita.setEstres(nuevaVisita.getEstres());
+		visita.setDieta(nuevaVisita.getDieta());
+		visita.setAlimentacion(nuevaVisita.getAlimentacion());
+		visita.setEjercicio(nuevaVisita.getEjercicio());
 		visitaService.saveVisita(visita);	
-		NuevaVisita newVisita = new NuevaVisita(visita.getEnfermero().getCc(),visita.getPaciente().getCc(),visita.getObservaciones(), visita.getComentarios(),visita.getCreateAt());
-			return new ResponseEntity<>(newVisita,HttpStatus.CREATED);
+		EnfermeroPaciente rta = new EnfermeroPaciente(visita.getEnfermero().getCc(),visita.getPaciente().getCc());
+
+		return new ResponseEntity<>(rta,HttpStatus.CREATED);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
