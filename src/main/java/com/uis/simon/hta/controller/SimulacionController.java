@@ -60,27 +60,6 @@ public class SimulacionController {
 	
 	}
 	
-	@PostMapping("/guardarSimulacionPaciente")
-	public ResponseEntity<?> addSimulacionPaciente(@RequestBody NuevaSimulacionPaciente nuevaSimulacion){
-		Paciente paciente = pacienteService.findByCc(nuevaSimulacion.getPaciente());
-		if (paciente != null) {
-			Simulacion s = new Simulacion();
-			s.setPaciente(paciente);
-			s.setAltura(nuevaSimulacion.getAltura());
-			s.setEdad(nuevaSimulacion.getEdad());
-			s.setPeso(nuevaSimulacion.getPeso());
-			s.setSbp(nuevaSimulacion.getSbp());
-			s.setDbp(nuevaSimulacion.getDbp());
-			s.setHerencia(nuevaSimulacion.getHerencia());
-			s.setFumar(nuevaSimulacion.getFumar());
-			s.setCalorias(nuevaSimulacion.getCalorias());
-			simulacionService.save(s);
-			return new ResponseEntity<>(s,HttpStatus.CREATED);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
-		
-	}
-
 	@PostMapping("/simulaEnfermero")
 	public ResponseEntity<?>  simulaEnfermero(@RequestBody NuevaSimulacionEnfermero nuevaSimulacion){
 		List<ResultadoModelo> a = modelo.simulaEnfermero(nuevaSimulacion);
