@@ -52,19 +52,19 @@ public class VisitaController {
 		return visitaService.findAll();
 	}
 	
-	@GetMapping("/listaPAporenfermero/{id}")
+	@GetMapping("/listaPacientes/{id}")
 	public ResponseEntity<?> listaVisitaEnfermero(@PathVariable(name = "id")Long enfermero){
 		List<Pacientes> visitaDb =  visitaService.findAllPacientesByEnfermero(enfermero);
 	return new ResponseEntity<>(visitaDb, HttpStatus.OK) ;
 	}
 	
-	@GetMapping("/listaENporpaciente/{id}")
+	@GetMapping("/listaEnfermeros/{id}")
 	public ResponseEntity<?> listaPaciente(@PathVariable(name = "id")Long paciente){
 		List<Enfermeros> visitaDb =  visitaService.findAllEnfermerosByPaciento(paciente);
 	return new ResponseEntity<>(visitaDb, HttpStatus.OK) ;
 	}
 
-	@GetMapping("/listaporenfermero/{id}")
+	@GetMapping("/listaVisitasEnfermero/{id}")
 	public ResponseEntity<?> listaEnfermero(@PathVariable(name = "id")Long enfermero){
 	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByEnfermero(enfermero);
 		 if(visitaDb != null) {
@@ -76,7 +76,7 @@ public class VisitaController {
 		}
 	 }
 	
-	@GetMapping("/listaporpaciente/{id}")
+	@GetMapping("/listaVisitasPaciente/{id}")
 	public ResponseEntity<?> listaVisitasPaciente(@PathVariable(name = "id")Long paciente){
 	 Collection<Visita> visitaDb =  visitaService.findAllVisitasByPaciente(paciente);
 		 if(visitaDb != null) {
