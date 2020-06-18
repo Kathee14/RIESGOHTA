@@ -87,8 +87,7 @@ public class VisitaController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	 }
-	
-	
+
 	
 	@PostMapping("/guardarVisita")
 	public ResponseEntity<?> saveVisita(@RequestBody NuevaSimulacionEnfermero nuevaVisita){
