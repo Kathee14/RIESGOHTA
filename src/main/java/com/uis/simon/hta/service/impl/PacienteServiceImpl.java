@@ -84,6 +84,11 @@ public class PacienteServiceImpl implements IPacienteService{
 		return pacienteDao.save(paciente);
 	}
 
+	@Override
+	public Paciente findPaciente(String cc) {
+		return (Paciente) pacienteDao.findByCc(cc);
+	}
+
 	
     
 	}

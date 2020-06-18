@@ -18,6 +18,8 @@ public interface IPacienteService {
 	
 	public Paciente findByCc(String cc);
 	
+	public Paciente findPaciente(String cc);
+	
 	public Paciente findById(Long id);
 	
 	public Paciente update(Paciente paciente);
