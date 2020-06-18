@@ -1,7 +1,5 @@
 package com.uis.simon.hta.dto;
 
-import java.util.Date;
-
 public class Pacientes {
 	
 	private String nombre;

@@ -102,6 +102,7 @@ public class VisitaController {
 		visita.setSbp(nuevaVisita.getSbp());
 		visita.setDbp(nuevaVisita.getDbp());
 		visita.setHerencia(nuevaVisita.getHerencia());
+		visita.setFumar(nuevaVisita.getFumar());
 		visita.setSemanaF(nuevaVisita.getSemanaF());
 		visita.setUpDown(nuevaVisita.getUpDown());
 		visita.setUpDownCalorias(nuevaVisita.getUpDownCalorias());
@@ -110,6 +111,7 @@ public class VisitaController {
 		visita.setRecomendaciones(nuevaVisita.getRecomendaciones());
 		visita.setObservaciones(nuevaVisita.getObservaciones());
 		visita.setDiabetes(nuevaVisita.getDiabetes());
+		visita.setSueño(nuevaVisita.getSueño());
 		visita.setAlcohol(nuevaVisita.getAlcohol());
 		visita.setEstres(nuevaVisita.getEstres());
 		visita.setDieta(nuevaVisita.getDieta());

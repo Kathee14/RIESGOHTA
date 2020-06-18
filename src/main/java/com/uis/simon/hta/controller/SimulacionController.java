@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uis.simon.hta.dto.NuevaSimulacionEnfermero;
 import com.uis.simon.hta.dto.NuevaSimulacionPaciente;
 import com.uis.simon.hta.dto.ResultadoModelo;
-import com.uis.simon.hta.entity.Enfermero;
 import com.uis.simon.hta.entity.Paciente;
 import com.uis.simon.hta.entity.Simulacion;
 import com.uis.simon.hta.service.ICorrerModeloService;
-import com.uis.simon.hta.service.IEnfermeroService;
 import com.uis.simon.hta.service.IPacienteService;
 import com.uis.simon.hta.service.ISimulacionService;
 
@@ -33,9 +31,6 @@ public class SimulacionController {
 	
 	@Autowired
 	ICorrerModeloService modelo;
-	
-	@Autowired
-	private IEnfermeroService enfermeroService;
 	
 	@Autowired
 	private IPacienteService pacienteService;
@@ -74,14 +69,4 @@ public class SimulacionController {
 				
 	}
 	
-	@PostMapping("/addSimulaEnfermero")
-	public ResponseEntity<?>  addSimulacionEnfermero(@RequestBody NuevaSimulacionEnfermero nuevaSimulacion){
-		List<ResultadoModelo> a = modelo.simulaEnfermero(nuevaSimulacion);
-		Enfermero enfermero = enfermeroService.findByCc(nuevaSimulacion.getPaciente());
-		Paciente paciente = pacienteService.findByCc(nuevaSimulacion.getPaciente());
-		return new ResponseEntity<>(HttpStatus.OK);
-				
-	}
-		
-		
 }

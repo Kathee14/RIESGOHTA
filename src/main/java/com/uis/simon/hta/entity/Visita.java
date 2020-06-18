@@ -275,6 +275,14 @@ public class Visita implements Serializable {
 		this.diabetes = diabetes;
 	}
 
+	public String getSueño() {
+		return sueño;
+	}
+
+	public void setSueño(String sueño) {
+		this.sueño = sueño;
+	}
+
 	public String getAlcohol() {
 		return alcohol;
 	}

@@ -42,6 +42,8 @@ public class NuevaSimulacionEnfermero {
 	
 	private String diabetes;
 	
+	private String sueño;
+	
 	private String alcohol;
 	
 	private String estres;
@@ -291,5 +293,14 @@ public class NuevaSimulacionEnfermero {
 	public void setEjercicio(String ejercicio) {
 		this.ejercicio = ejercicio;
 	}
+
+	public String getSueño() {
+		return sueño;
+	}
+
+	public void setSueño(String sueño) {
+		this.sueño = sueño;
+	}
+
 
 }
