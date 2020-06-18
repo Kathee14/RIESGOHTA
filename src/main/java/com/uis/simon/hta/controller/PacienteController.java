@@ -111,7 +111,8 @@ public class PacienteController {
 				paciente.setBarrio(modificarPaciente.getBarrio());
 				paciente.setPassword(modificarPaciente.getPassword());
 				paciente.setEmail(modificarPaciente.getEmail());
-				paciente.setCelular(modificarPaciente.getCelular());	
+				paciente.setCelular(modificarPaciente.getCelular());
+				paciente.setCreateAt(modificarPaciente.getCreado());
 				pacienteService.update(paciente);
 				return new ResponseEntity<>(paciente, HttpStatus.OK);
 		}

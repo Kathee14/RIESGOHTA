@@ -58,13 +58,14 @@ public class NuevoPaciente {
 	@Column(name="celular")
 	private Long celular;
 	
-
+	private Date Create_At;
+	
 	 public NuevoPaciente(){}
 
 	public NuevoPaciente(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String tipo_doc,
 			@NotBlank String cc, @NotNull Date fec_nac, @NotBlank String ciudad, @NotBlank String direccion,
 			@NotBlank String barrio, @NotBlank String password, String sexo, @NotBlank @Email String email,
-			@NotNull Long celular) {
+			@NotNull Long celular, @NotNull Date Create_At) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -78,6 +79,7 @@ public class NuevoPaciente {
 		this.sexo = sexo;
 		this.email = email;
 		this.celular = celular;
+		this.Create_At = Create_At;
 	}
 
 	public String getNombre() {
@@ -175,6 +177,13 @@ public class NuevoPaciente {
 	public void setCelular(Long celular) {
 		this.celular = celular;
 	}
-	
-	
+
+	public Date getCreate_At() {
+		return Create_At;
+	}
+
+	public void setCreate_At(Date create_At) {
+		Create_At = create_At;
+	}
+
 }

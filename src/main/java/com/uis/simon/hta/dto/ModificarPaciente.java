@@ -30,12 +30,13 @@ public class ModificarPaciente {
 
 	private Long celular;
 	
+	private Date creado;
 	
 	public ModificarPaciente() {}
 	
 	
 	public ModificarPaciente(String nombre, String apellido, String tipo_doc, String cc, Date fec_nac, String ciudad,
-			String direccion, String barrio, String password,  String sexo, String email, Long celular) {
+			String direccion, String barrio, String password,  String sexo, String email, Long celular,Date creado) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -49,6 +50,7 @@ public class ModificarPaciente {
 		this.sexo = sexo;
 		this.email = email;
 		this.celular = celular;
+		this.creado = creado;
 	}
 	
 	public ModificarPaciente(Paciente paciente) {
@@ -164,6 +166,15 @@ public class ModificarPaciente {
 	public void setCelular(Long celular) {
 		this.celular = celular;
 	}
-	
+
+
+	public Date getCreado() {
+		return creado;
+	}
+
+
+	public void setCreado(Date creado) {
+		this.creado = creado;
+	}
 	
 }
