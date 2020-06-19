@@ -33,6 +33,8 @@ public class NuevaSimulacionEnfermero {
 	private int semanaC;
 
 	private int calorias;
+	
+	private int tiempo;
 
 	private ArrayList<ActividadFront> actividades;
 	
@@ -204,6 +206,13 @@ public class NuevaSimulacionEnfermero {
 		this.calorias = calorias;
 	}
 
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
 
 	public ArrayList<ActividadFront> getActividades() {
 		return actividades;

@@ -97,7 +97,7 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 		s.getFumar());
 		
 		int j =0;
-		for (int i=0; i<25000; i++) {
+		for (int i=0; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
 			if(i == 365*j+1) { 
 				j = j+1;
 		ResultadoModelo valores = new ResultadoModelo(r.getRiesgoHTA(), r.getEdad());		

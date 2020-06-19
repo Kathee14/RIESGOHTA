@@ -74,7 +74,7 @@ public class Visita implements Serializable {
 	@Column(name="observaciones")
 	private String observaciones;
 	
-	@Column(name="diabletes")
+	@Column(name="diabetes")
 	private String diabetes;
 	
 	@Column(name="sueño")
