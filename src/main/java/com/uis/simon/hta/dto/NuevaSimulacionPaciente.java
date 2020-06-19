@@ -31,13 +31,15 @@ public class NuevaSimulacionPaciente {
 	private int semanaC;
 
 	private int calorias;
-
+	
+	private int tiempo;
+	
 	private ArrayList<ActividadFront> actividades;
 	
 	public NuevaSimulacionPaciente() {}
 
 	public NuevaSimulacionPaciente(String paciente, int sexo, double altura, int edad, double peso, int sbp, int dbp,
-			int herencia, int fumar, int semanaF, int upDown, int upDownCalorias, int semanaC, int calorias,
+			int herencia, int fumar, int semanaF, int upDown, int upDownCalorias, int semanaC, int calorias, int tiempo,
 			ArrayList<ActividadFront> actividades) {
 		super();
 		this.paciente = paciente;
@@ -54,6 +56,7 @@ public class NuevaSimulacionPaciente {
 		this.upDownCalorias = upDownCalorias;
 		this.semanaC = semanaC;
 		this.calorias = calorias;
+		this.tiempo = tiempo;
 		this.actividades = actividades;
 	}
 
@@ -167,6 +170,14 @@ public class NuevaSimulacionPaciente {
 
 	public void setCalorias(int calorias) {
 		this.calorias = calorias;
+	}
+	
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
 	}
 
 	public ArrayList<ActividadFront> getActividades() {
