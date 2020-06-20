@@ -40,7 +40,8 @@ public class VisitaServiceImpl implements IVisitaService {
 		List<Pacientes> lista = new ArrayList<Pacientes>();
 		
 			for (Visita a: v) {
-				Pacientes pacientes = new Pacientes(a.getPaciente().getNombre(),
+				Pacientes pacientes = new Pacientes(a.getPaciente().getId(),
+													a.getPaciente().getNombre(),
 													a.getPaciente().getApellido(),
 													a.getPaciente().getCc())
 ;				lista.add(pacientes);
@@ -54,7 +55,7 @@ public class VisitaServiceImpl implements IVisitaService {
 		List<Enfermeros> lista = new ArrayList<Enfermeros>();
 		
 		for(Visita a: visitas) {
-			Enfermeros enfermeros = new Enfermeros(a.getEnfermero().getNombre(), a.getEnfermero().getApellido(), a.getEnfermero().getCc());
+			Enfermeros enfermeros = new Enfermeros(a.getEnfermero().getId(),a.getEnfermero().getNombre(), a.getEnfermero().getApellido(), a.getEnfermero().getCc());
 			lista.add(enfermeros);
 		}
 		return lista;

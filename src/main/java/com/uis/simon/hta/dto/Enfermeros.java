@@ -2,6 +2,8 @@ package com.uis.simon.hta.dto;
 
 public class Enfermeros {
 	
+	private Long id;
+	
 	private String nombre;
 	
 	private String apellido;
@@ -10,11 +12,21 @@ public class Enfermeros {
 
 	public Enfermeros() {}
 	
-	public Enfermeros(String nombre, String apellido, String cc) {
+	public Enfermeros(long id, String nombre, String apellido, String cc) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.cc = cc;
+	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
