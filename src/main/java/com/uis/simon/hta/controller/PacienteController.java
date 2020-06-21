@@ -91,9 +91,9 @@ public class PacienteController {
 		}
 	}
 	
-	@GetMapping(path = {"/{cc}"})
-    public Paciente listarId(@PathVariable("cc")String cc){
-        return pacienteService.findByCc(cc);
+	@GetMapping(path = {"/{id}"})
+    public Paciente listarId(@PathVariable("id")Long id){
+        return pacienteService.findById(id);
     }
 	
 	
