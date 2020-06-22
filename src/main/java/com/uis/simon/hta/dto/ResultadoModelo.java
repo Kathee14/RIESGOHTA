@@ -6,14 +6,29 @@ public class ResultadoModelo {
 	
 	private int edad;
 	
+	private double fumar;
+	
+	private double peso;
+	
+	private double sistolica;
+	
+	private double diastolica;
+	
 	
 	public ResultadoModelo() {}
 
-	public ResultadoModelo(double riesgoHta, int edad) {
+	
+	public ResultadoModelo(int edad, double riesgoHta, double fumar, double peso, double sistolica, double diastolica) {
 		super();
 		this.riesgoHta = riesgoHta;
 		this.edad = edad;
+		this.fumar = fumar;
+		this.peso = peso;
+		this.sistolica = sistolica;
+		this.diastolica = diastolica;
 	}
+
+
 
 	public double getRiesgoHta() {
 		return riesgoHta;
@@ -29,6 +44,46 @@ public class ResultadoModelo {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+
+
+	public double getFumar() {
+		return fumar;
+	}
+
+
+	public void setFumar(double fumar) {
+		this.fumar = fumar;
+	}
+
+
+	public double getPeso() {
+		return peso;
+	}
+
+
+	public void setPeso(double peso) {
+		this.peso = peso;
+	}
+
+
+	public double getSistolica() {
+		return sistolica;
+	}
+
+
+	public void setSistolica(double sistolica) {
+		this.sistolica = sistolica;
+	}
+
+
+	public double getDiastolica() {
+		return diastolica;
+	}
+
+
+	public void setDiastolica(double diastolica) {
+		this.diastolica = diastolica;
 	}
 
 

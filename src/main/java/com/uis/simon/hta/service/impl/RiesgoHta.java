@@ -702,6 +702,14 @@ public class RiesgoHta {
 
 	public int getDiasCig() {
 		return diasCig;
+	}
+
+	public double getRiesgoCigarrillo() {
+		return riesgoCigarrillo;
+	}
+
+	public void setRiesgoCigarrillo(double riesgoCigarrillo) {
+		this.riesgoCigarrillo = riesgoCigarrillo;
 	}  
 	
 
