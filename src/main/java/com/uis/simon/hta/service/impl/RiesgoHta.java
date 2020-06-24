@@ -87,6 +87,8 @@ public class RiesgoHta {
 	private double suma;
     private double riesgoHTA;
     private double pesoSinFumar;
+    
+    public RiesgoHta() {}
 	
     public RiesgoHta(int edadAct, double pesoAct, int sexo, double altura, int t1, int t2, int t3, int t4, int t5, int met1, int met2,
 			int met3, int met4, int met5, int opCal, int calorias, int calExtra,int semCal, int semCig, int opSBP, int opDBP, int herencia,int opCig) {
@@ -417,10 +419,6 @@ public class RiesgoHta {
 		else
 			return edadAct * DIAS + semCig * SEMANA;
 	}
-	
-	public String toString() {      
-		return String.valueOf("        " + edad + "     "+  riesgoHTA);  
-	} 
 
 	public int getEdad() {
 		return edad;

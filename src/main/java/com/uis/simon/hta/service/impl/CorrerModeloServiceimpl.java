@@ -48,7 +48,7 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 				s.getHerencia(),
 				s.getFumar());
 		int j =0;
-		for (int i=0; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
+		for (int i=1; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
 			if(i == 365*j+1) { 
 				j = j+1;
 				
@@ -97,8 +97,8 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 		s.getFumar());
 		
 		int j =0;
-		for (int i=0; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
-			if(i == 365*j+1) { 
+		for (int i=1; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
+			if(i == 365*j) { 
 				j = j+1;
 		ResultadoModelo valores = new ResultadoModelo(r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getSBP(), r.getDBP());		
 		g.add(valores);
