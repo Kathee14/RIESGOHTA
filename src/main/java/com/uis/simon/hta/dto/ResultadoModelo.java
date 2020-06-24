@@ -12,17 +12,19 @@ public class ResultadoModelo {
 	
 	private double diastolica;
 	
+	private double pal;
 	
 	public ResultadoModelo() {}
 
 	
-	public ResultadoModelo(int edad, double riesgoHta, double peso, double sistolica, double diastolica) {
+	public ResultadoModelo(int edad, double riesgoHta, double peso, double sistolica, double diastolica, double pal) {
 		super();
 		this.riesgoHta = riesgoHta;
 		this.edad = edad;
 		this.peso = peso;
 		this.sistolica = sistolica;
 		this.diastolica = diastolica;
+		this.pal = pal;
 	}
 
 
@@ -70,6 +72,16 @@ public class ResultadoModelo {
 
 	public void setDiastolica(double diastolica) {
 		this.diastolica = diastolica;
+	}
+
+
+	public double getPal() {
+		return pal;
+	}
+
+
+	public void setPal(double pal) {
+		this.pal = pal;
 	}
 
 
