@@ -2,6 +2,7 @@ package com.uis.simon.hta.service.impl;
 
 import org.springframework.stereotype.Service;
 
+
 import com.uis.simon.hta.multiplicadoresModelo.*;
 
 @Service
@@ -23,7 +24,7 @@ public class RiesgoHta {
 	private int edadAct;
 	private int tiempo;
 	private int diasInicio;
-	private int iteracion = 1;
+	private int iteracion = 0;
 	private int edadIngesta;
 	private int diasCig;
 	private int diasCigarrillo = 0;
@@ -49,7 +50,7 @@ public class RiesgoHta {
 	private double p4;
 	private double p5;
 	private double PAL;
-	private double TMB = 0;
+	private double TMB;
 	private double distincionPal;
 	private double coefAct;
 	private double gastoEnergetico;
@@ -59,9 +60,10 @@ public class RiesgoHta {
 	private double pesoCig;
 	private int upDown;	
 	private int calExtra;
-	private int ac;
-	private int dc;
-	private int ingestaDiaria;
+	private double ac;
+	private double dc;
+	private int ingesta;
+	private double ingestaDiaria;
     private double balanceEnergia;
     private double inenad;
     private double AP;
@@ -85,8 +87,6 @@ public class RiesgoHta {
 	private double suma;
     private double riesgoHTA;
     private double pesoSinFumar;
-    
-    public RiesgoHta() {}
 	
     public RiesgoHta(int edadAct, double pesoAct, int sexo, double altura, int t1, int t2, int t3, int t4, int t5, int met1, int met2,
 			int met3, int met4, int met5, int opCal, int calorias, int calExtra,int semCal, int semCig, int opSBP, int opDBP, int herencia,int opCig) {
@@ -99,6 +99,8 @@ public class RiesgoHta {
 		this.diasCigarrillo = 0;
 		this.peso = pesoAct;
 		this.pesoAct = pesoAct;
+		this.pesoTotal = pesoAct;
+		this.imc = pesoAct/(altura*altura);
 		this.sexo = sexo;
 		this.altura = altura;
 		this.t1 = t1;
@@ -112,17 +114,107 @@ public class RiesgoHta {
 		this.met4 = met4;
 		this.met5 = met5;
 		this.opCal = opCal;
-		this.ingestaDiaria = calorias;
+		this.ingesta = calorias;
+		this.ingestaDiaria = ingesta;
+		this.upDown = opCal;
 		this.calExtra = calExtra;
 		this.opDBP = opDBP;
 		this.opSBP = opSBP;
 		this.herencia = herencia;
 		this.opCig = opCig;
+		this.riesgoCigarrillo = opCig*constanteCigarrillo;
+		this.riesgoDiastolica= opDBP * constanteDiastolica;
+		this.riesgoSistolica = opSBP * constanteSistolica;
+		this.riesgoSexo = sexo*constanteSexo;
+		this.riesgoEdad = edadAct*constanteEdad;
+		this.riesgoHerencia = herencia * constanteHerencia;
+		this.riesgoExtraDias = edadAct * constanteDiast * opDBP;
+		this.riesgoIMC = this.imc*constanteMasa;
+		this.suma = beta + this.riesgoCigarrillo + this.riesgoDiastolica + this.riesgoSistolica + this.riesgoSexo + this.riesgoEdad + this.riesgoHerencia + this.riesgoExtraDias + this.riesgoIMC;
+		this.riesgoHTA =  (1-Math.exp(-Math.exp((Math.log(1)-this.suma)/escala)))*100;
+		this.DBP = opDBP;
+		this.SBP = opSBP;
 		
-	}
+		
+		if(diasInicio >= edadIngesta ) {
+			upDown = opCal;
+		} else { 
+			if(this.opCal==1) {
+				upDown=0;
+			} else {
+				upDown = 1;
+			}
+			
+		}
+		
+		
+		if (sexo == 0) {
+			this.TMB = (293-(3.8*this.edad)+(456.4*altura)+(10.12*pesoAct));
+		} else {
+			this.TMB = 204-(4*edad)+(450.5*altura)+(11.69*pesoAct);
+		}
+		
+		this.p1 = ((met1-1)*(((1.15/0.9)*t1)/1440))/(this.TMB/(0.0175*1440*pesoAct));
+		
+		this.p2 = ((met2-1)*(((1.15/0.9)*t2)/1440))/(this.TMB/(0.0175*1440*pesoAct));
+		
+		this.p3 = ((met3-1)*(((1.15/0.9)*t3)/1440))/(this.TMB/(0.0175*1440*pesoAct));
+		
+		this.p4 = ((met4-1)*(((1.15/0.9)*t4)/1440))/(this.TMB/(0.0175*1440*pesoAct));
+		
+		this.p5 = ((met5-1)*(((1.15/0.9)*t5)/1440))/(this.TMB/(0.0175*1440*pesoAct));
+		
+		
+		this.PAL = this.p1 + this.p2 + this.p3 + this.p4 + this.p5;
+		
+		
+		if((this.PAL>=0)&&(PAL<1.4)) {
+			this.distincionPal=1;
+		} else {
+				if((this.PAL>=1.4)&&(PAL<1.6)) {
+					this.distincionPal=2;
+				} else {
+						if((this.PAL>=1.6)&&(PAL<1.9)) {
+							this.distincionPal=3;
+						} else {
+							this.distincionPal=4;
+						}
+				}
+			
+		}
+		
+		if(sexo == 0) {
+			this.coefAct = Multiplicador.MultiplicadorFisicoHombres(distincionPal);		
+		} else {
+			this.coefAct = Multiplicador.MultiplicadorFisicoMujeres(distincionPal);
+		}
+		
+		if(sexo == 0) {
+			this.gastoEnergetico = (864-(9.72*edadAct)+(this.coefAct*(14.2*pesoAct)+(503*altura)));
+		} else {
+			this.gastoEnergetico = (387-(7.31*edadAct)+(this.coefAct*(10.9*pesoAct)+(660.7*altura)));
+		}
+		
+		if(this.imc<18.5) {
+			this.inenad = gastoEnergetico;
+		} else {
+			this.inenad = ingestaDiaria;
+		}
+		
+		this.balanceEnergia = this.inenad-this.gastoEnergetico;
+		
+		if(this.balanceEnergia >= 0) {
+			this.AP = (this.balanceEnergia/CAL);
+		} else {
+			 this.AP = 0 ;
+		}
+    }
+    
     
     public void riesgo() {
-		
+
+    	//VARIABLES
+    	
     	this.diasInicio = diasInicio + 1;
 		
 		if(diasInicio >= diasCig) {
@@ -133,7 +225,6 @@ public class RiesgoHta {
 		
 		this.diasCigarrillo = diasInicio>diasCig ? this.diasCigarrillo + 1 : this.diasCigarrillo;
 		
-				
 		if(diasInicio < diasCig) {
 			riesgoCigarrillo = opCig* constanteCigarrillo;
 		} else {
@@ -143,7 +234,6 @@ public class RiesgoHta {
 				riesgoCigarrillo = constanteCigarrillo;
 			}
 		}
-		
 		
 		if(riesgoCigarrillo == 0 && opCig == 1 && diasInicio<=diasCig) {
 			pesoSinFumar = peso ;
@@ -159,42 +249,49 @@ public class RiesgoHta {
 			}
 			
 		}
-			
 		
-		this.pesoTotal = peso + pesoCig;
+		this.pesoTotal = this.peso + this.pesoCig;
 		
-		
-		if(diasInicio <= edadIngesta ) {
-			upDown = opCal;
-		} else { 
-			if(this.opCal==1) {
-				upDown=0;
-			} else {
-				upDown = 1;
-			}
-			
-		}
-    	
-		this.riesgoHerencia = constanteHerencia * herencia;
-		
-		if(this.upDown == 1) {
-			this.ac = this.calExtra;
-		} else {
-			this.ac=0;
-		}
-		
-		if(this.upDown == 0) {
-			this.dc = this.calExtra;
-		} else {
-			this.dc = 0;
-		}
-		
-		this.ingestaDiaria = ingestaDiaria + ac -dc;
-		
-		this.imc = pesoTotal/(altura*altura);
+		this.imc = (this.pesoTotal/(this.altura*this.altura));
 		
 		this.riesgoIMC = imc*constanteMasa;
 		
+		this.riesgoHerencia = constanteHerencia * herencia;
+		
+		//RiesgoDiastolica
+		 this.riesgoDiastolica = DBP * constanteDiastolica;
+		
+		//RiesgoSistolica
+		this.riesgoSistolica = SBP * constanteSistolica;
+		
+		//RIESGOExtraDiastolico
+		this.riesgoExtraDias = DBP * edad * constanteDiast;
+		
+		//REGULADOR
+		this.regulador = this.edad-(this.edadAct-20);
+		
+		//RiesgoEdad
+		
+		if(this.sexo == 1) {
+			riesgoEdad= (constanteEdad*Multiplicador.reguladorEdadMujeres(regulador))*edad;
+		} else {
+			riesgoEdad= (constanteEdad*Multiplicador.reguladorEdadHombres(regulador))*edad;
+		}
+		
+		//RiesgoSexo
+		this.riesgoSexo = constanteSexo * sexo;
+		
+		//Suma
+		this.suma =  beta + riesgoDiastolica + riesgoSistolica + riesgoEdad + riesgoExtraDias + riesgoHerencia + riesgoIMC + riesgoSexo;
+		
+		//RIESGOHTA
+		riesgoHTA = (1-Math.exp(-Math.exp((Math.log(1)-suma)/escala)))*100;
+		
+		this.diferenciaPeso = peso - pesoAct;
+		
+		SBP = opSBP + (Multiplicador.MultiplicadorPresionSistolica(this.diferenciaPeso));
+	
+		DBP = opDBP + (Multiplicador.MultiplicadorPresionDiastolica(this.diferenciaPeso));	
 		
 		if (sexo == 0) {
 			TMB = (293-(3.8*this.edad)+(456.4*altura)+(10.12*pesoTotal));
@@ -230,6 +327,18 @@ public class RiesgoHta {
 			
 		}
 		
+		if(diasInicio >= edadIngesta ) {
+			upDown = opCal;
+		} else { 
+			if(this.opCal==1) {
+				upDown=0;
+			} else {
+				upDown = 1;
+			}
+			
+		}
+		
+
 		if(sexo == 0) {
 			this.coefAct = Multiplicador.MultiplicadorFisicoHombres(distincionPal);		
 		} else {
@@ -243,7 +352,6 @@ public class RiesgoHta {
 			this.gastoEnergetico = (387-(7.31*edad)+(coefAct*(10.9*pesoTotal)+(660.7*altura)));
 		}
 		
-		
 		if(this.imc<18.5) {
 			this.inenad = gastoEnergetico;
 		} else {
@@ -251,8 +359,23 @@ public class RiesgoHta {
 		}
 		
 		this.balanceEnergia = inenad-gastoEnergetico;
+		
+		//FLUJOS   	
 
 		
+		if(this.upDown == 1) {
+			this.ac = this.calExtra;
+		} else {
+			this.ac=0;
+		}
+		
+		if(this.upDown == 0) {
+			this.dc = this.calExtra;
+		} else {
+			this.dc = 0;
+		}
+		
+
 		if(this.balanceEnergia >= 0) {
 			this.AP = (this.balanceEnergia/CAL);
 		} else {
@@ -265,45 +388,16 @@ public class RiesgoHta {
 			 this.DP = 0 ;
 		}
 		
-		this.diferenciaPeso = peso - pesoAct;
 		
-		SBP = opSBP + (Multiplicador.MultiplicadorPresionSistolica(this.diferenciaPeso));
-	
-		DBP = opDBP + (Multiplicador.MultiplicadorPresionDiastolica(this.diferenciaPeso));	
-		
-		//RiesgoDiastolica
-		 this.riesgoDiastolica = DBP * constanteDiastolica;
-		
-		//RiesgoSistolica
-		this.riesgoSistolica = SBP * constanteSistolica;
-		
-		//RIESGOExtraDiastolico
-		this.riesgoExtraDias = DBP * edad * constanteDiast;
-		
-		this.regulador = this.edad-(this.edadAct-20);
-		
-		//RiesgoEdad
-		
-		if(this.sexo == 1) {
-			riesgoEdad= (constanteEdad*Multiplicador.reguladorEdadMujeres(regulador))*edad;
-		} else {
-			riesgoEdad= (constanteEdad*Multiplicador.reguladorEdadHombres(regulador))*edad;
-		}
-		
-		//RiesgoSexo
-		this.riesgoSexo = constanteSexo * sexo;
-		
-		//Suma
-		this.suma =  beta + riesgoDiastolica + riesgoSistolica + riesgoEdad + riesgoExtraDias + riesgoHerencia + riesgoIMC + riesgoSexo;
-		
-		//RIESGOHTA
-		riesgoHTA = (1-Math.exp(-Math.exp((Math.log(1)-suma))/escala))*100;
+		this.ingestaDiaria = ingestaDiaria + (ac/365) - (dc/365);
+
 		
 		this.peso = peso + AP - DP;
 		
 		
 		if (iteracion % DIAS == 0) {
 			this.edad = edad + 1;
+					
 		}
 		
 		this.iteracion = iteracion + 1;
@@ -512,27 +606,27 @@ public class RiesgoHta {
 		this.upDown = upDown;
 	}
 
-	public int getAc() {
+	public double getAc() {
 		return ac;
 	}
 
-	public void setAc(int ac) {
+	public void setAc(double ac) {
 		this.ac = ac;
 	}
 
-	public int getDc() {
+	public double getDc() {
 		return dc;
 	}
 
-	public void setDc(int dc) {
+	public void setDc(double dc) {
 		this.dc = dc;
 	}
 
-	public int getIngestaDiaria() {
+	public double getIngestaDiaria() {
 		return ingestaDiaria;
 	}
 
-	public void setIngestaDiaria(int ingestaDiaria) {
+	public void setIngestaDiaria(double ingestaDiaria) {
 		this.ingestaDiaria = ingestaDiaria;
 	}
 
@@ -702,14 +796,6 @@ public class RiesgoHta {
 
 	public int getDiasCig() {
 		return diasCig;
-	}
-
-	public double getRiesgoCigarrillo() {
-		return riesgoCigarrillo;
-	}
-
-	public void setRiesgoCigarrillo(double riesgoCigarrillo) {
-		this.riesgoCigarrillo = riesgoCigarrillo;
 	}  
 	
 
