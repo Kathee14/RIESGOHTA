@@ -105,6 +105,8 @@ public class PacienteController {
 	@PutMapping(path = {"/{id}"})
 	public ResponseEntity<?> updateUsuario(@PathVariable(value="id")Long id,@RequestBody ModificarPaciente modificarPaciente){
 		Paciente paciente = pacienteService.findById(id);
+		Paciente verificar = pacienteService.findByCc(modificarPaciente.getCc());
+		if(verificar != null && verificar.getId() == id) {
 				paciente.setNombre(modificarPaciente.getNombre());
 				paciente.setApellido(modificarPaciente.getApellido());
 				paciente.setTipo_doc(modificarPaciente.getTipo_doc());
@@ -116,10 +118,13 @@ public class PacienteController {
 				paciente.setPassword(modificarPaciente.getPassword());
 				paciente.setEmail(modificarPaciente.getEmail());
 				paciente.setCelular(modificarPaciente.getCelular());
-				paciente.setCreateAt(modificarPaciente.getCreado());
+				paciente.setCreateAt(modificarPaciente.getCreateAt());
 				pacienteService.update(paciente);
 				return new ResponseEntity<>(paciente, HttpStatus.OK);
+	} else {
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
 		
 
 	@PostMapping("/login")
