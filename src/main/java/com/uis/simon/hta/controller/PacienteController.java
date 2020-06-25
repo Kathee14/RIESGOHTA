@@ -96,12 +96,6 @@ public class PacienteController {
         return pacienteService.findById(id);
     }
 	
-	@GetMapping(path = {"/buscarxcc/{cc}"})
-    public Paciente listarCc(@PathVariable("cc")String cc){
-        return pacienteService.findByCc(cc);
-    }
-	
-
 	@PutMapping(path = {"/{id}"})
 	public ResponseEntity<?> updateUsuario(@PathVariable(value="id")Long id,@RequestBody ModificarPaciente modificarPaciente){
 		Paciente paciente = pacienteService.findById(id);
