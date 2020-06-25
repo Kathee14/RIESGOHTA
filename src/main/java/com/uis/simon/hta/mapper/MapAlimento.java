@@ -13,7 +13,7 @@ public class MapAlimento {
 	
 	public static List<ListaAlimentos> convertirLista(List<Alimento> alimentos){
 		List<ListaAlimentos> listaAlimentos = new ArrayList<>();
-		for (Alimento alimento: alimentos) {
+			for (Alimento alimento: alimentos) {
 			listaAlimentos.add(new ListaAlimentos(alimento));
 		}
 		

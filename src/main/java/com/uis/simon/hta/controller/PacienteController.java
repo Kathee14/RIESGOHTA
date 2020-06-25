@@ -91,7 +91,7 @@ public class PacienteController {
 		}
 	}
 	
-	@GetMapping(path = {"/buscar/{id}"})
+	@GetMapping(path = {"/{id}"})
     public Paciente listarId(@PathVariable("id")Long id){
         return pacienteService.findById(id);
     }

@@ -197,7 +197,7 @@ public class RiesgoHta {
 			this.gastoEnergetico = (387-(7.31*edadAct)+(this.coefAct*(10.9*pesoAct)+(660.7*altura)));
 		}
 		
-		if(this.imc<18.5) {
+		if(this.imc<22) {
 			this.inenad = gastoEnergetico;
 		} else {
 			this.inenad = ingestaDiaria;

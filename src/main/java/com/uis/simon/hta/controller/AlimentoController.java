@@ -31,7 +31,7 @@ public class AlimentoController {
 		 List<Alimento> lista = alimentoService.findAll();	 
 		 List<ListaAlimentos> listaA = new ArrayList<>();
 		 listaA = MapAlimento.convertirLista(lista);
-         return new ResponseEntity<>(listaA, HttpStatus.OK);
+		 return new ResponseEntity<>(listaA, HttpStatus.OK);
    }
 	
 	 

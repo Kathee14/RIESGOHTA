@@ -14,10 +14,12 @@ public class ResultadoModelo {
 	
 	private double pal;
 	
+	private double imc;
+	
 	public ResultadoModelo() {}
 
 	
-	public ResultadoModelo(int edad, double riesgoHta, double peso, double sistolica, double diastolica, double pal) {
+	public ResultadoModelo(int edad, double riesgoHta, double peso, double sistolica, double diastolica, double pal, double imc) {
 		super();
 		this.riesgoHta = riesgoHta;
 		this.edad = edad;
@@ -25,6 +27,7 @@ public class ResultadoModelo {
 		this.sistolica = sistolica;
 		this.diastolica = diastolica;
 		this.pal = pal;
+		this.imc = imc;
 	}
 
 
@@ -82,6 +85,16 @@ public class ResultadoModelo {
 
 	public void setPal(double pal) {
 		this.pal = pal;
+	}
+
+
+	public double getImc() {
+		return imc;
+	}
+
+
+	public void setImc(double imc) {
+		this.imc = imc;
 	}
 
 
