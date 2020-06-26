@@ -19,7 +19,7 @@ import com.uis.simon.hta.service.IActividadService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user/actividad")
+@RequestMapping("/actividad")
 public class ActividadController {
 	
 	@Autowired
