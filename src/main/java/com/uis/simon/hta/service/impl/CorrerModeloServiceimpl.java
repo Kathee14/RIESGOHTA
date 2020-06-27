@@ -52,7 +52,7 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 			if(i == 365*j+1) { 
 				j = j+1;
 				
-				ResultadoModelo valores = new ResultadoModelo (r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getSBP(), r.getDBP(), r.getPAL(), r.getImc());		
+				ResultadoModelo valores = new ResultadoModelo (r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getPAL(), r.getImc());		
 				g.add(valores);
 				
 		}
@@ -100,7 +100,7 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 		for (int i=1; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
 			if(i == 365*j) { 
 				j = j+1;
-		ResultadoModelo valores = new ResultadoModelo(r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getSBP(), r.getDBP(), r.getPAL(), r.getImc());		
+		ResultadoModelo valores = new ResultadoModelo(r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getPAL(), r.getImc());		
 		g.add(valores);
 		
 }

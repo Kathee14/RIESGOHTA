@@ -2,7 +2,6 @@ package com.uis.simon.hta.service.impl;
 
 import org.springframework.stereotype.Service;
 
-
 import com.uis.simon.hta.multiplicadoresModelo.*;
 
 @Service
@@ -62,10 +61,9 @@ public class RiesgoHta {
 	private int calExtra;
 	private double ac;
 	private double dc;
-	private int ingesta;
 	private double ingestaDiaria;
     private double balanceEnergia;
-    private double inenad;
+    private double ingestaAdecuada;
     private double AP;
     private double DP;
     private static final int CAL = 7700;
@@ -116,8 +114,7 @@ public class RiesgoHta {
 		this.met4 = met4;
 		this.met5 = met5;
 		this.opCal = opCal;
-		this.ingesta = calorias;
-		this.ingestaDiaria = ingesta;
+		this.ingestaDiaria = calorias;
 		this.upDown = opCal;
 		this.calExtra = calExtra;
 		this.opDBP = opDBP;
@@ -137,23 +134,10 @@ public class RiesgoHta {
 		this.DBP = opDBP;
 		this.SBP = opSBP;
 		
-		
-		if(diasInicio >= edadIngesta ) {
-			upDown = opCal;
-		} else { 
-			if(this.opCal==1) {
-				upDown=0;
-			} else {
-				upDown = 1;
-			}
-			
-		}
-		
-		
 		if (sexo == 0) {
 			this.TMB = (293-(3.8*this.edad)+(456.4*altura)+(10.12*pesoAct));
 		} else {
-			this.TMB = 204-(4*edad)+(450.5*altura)+(11.69*pesoAct);
+			this.TMB = (204-(4*edad)+(450.5*altura)+(11.69*pesoAct));
 		}
 		
 		this.p1 = ((met1-1)*(((1.15/0.9)*t1)/1440))/(this.TMB/(0.0175*1440*pesoAct));
@@ -192,25 +176,45 @@ public class RiesgoHta {
 		}
 		
 		if(sexo == 0) {
-			this.gastoEnergetico = (864-(9.72*edadAct)+(this.coefAct*(14.2*pesoAct)+(503*altura)));
+			this.gastoEnergetico = (864-(9.72*edadAct)+(coefAct*(14.2*pesoAct)+(503*altura)));
 		} else {
-			this.gastoEnergetico = (387-(7.31*edadAct)+(this.coefAct*(10.9*pesoAct)+(660.7*altura)));
+			this.gastoEnergetico = (387-(7.31*edadAct)+(coefAct*(10.9*pesoAct)+(660.7*altura)));
 		}
 		
-		if(this.imc<22) {
-			this.inenad = gastoEnergetico;
+		if(this.imc>18 && this.imc<24) {
+			this.ingestaAdecuada = gastoEnergetico;
 		} else {
-			this.inenad = ingestaDiaria;
+			this.ingestaAdecuada = ingestaDiaria;
 		}
 		
-		this.balanceEnergia = this.inenad-this.gastoEnergetico;
+		this.balanceEnergia = this.ingestaAdecuada-this.gastoEnergetico;
+		
+		if(this.upDown == 1) {
+			this.ac = this.calExtra;
+		} else {
+			this.ac=0;
+		}
+		
+		if(this.upDown == 0) {
+			this.dc = this.calExtra;
+		} else {
+			this.dc = 0;
+		}
 		
 		if(this.balanceEnergia >= 0) {
 			this.AP = (this.balanceEnergia/CAL);
 		} else {
-			 this.AP = 0 ;
+			 this.AP = 0;
 		}
+		
+		if(this.balanceEnergia < 0) {
+			this.DP = (Math.abs(balanceEnergia/CAL));
+		} else {
+			 this.DP = 0 ;
+		}
+		
     }
+
     
     
     public void riesgo() {
@@ -354,13 +358,13 @@ public class RiesgoHta {
 			this.gastoEnergetico = (387-(7.31*edad)+(coefAct*(10.9*pesoTotal)+(660.7*altura)));
 		}
 		
-		if(this.imc<18.5) {
-			this.inenad = gastoEnergetico;
+		if(this.imc>18 && this.imc<24) {
+			this.ingestaAdecuada = gastoEnergetico;
 		} else {
-			this.inenad = ingestaDiaria;
+			this.ingestaAdecuada = ingestaDiaria;
 		}
 		
-		this.balanceEnergia = inenad-gastoEnergetico;
+		this.balanceEnergia = ingestaAdecuada-gastoEnergetico;
 		
 		//FLUJOS   	
 
@@ -391,7 +395,7 @@ public class RiesgoHta {
 		}
 		
 		
-		this.ingestaDiaria = ingestaDiaria + (ac/365) - (dc/365);
+		this.ingestaDiaria = ingestaDiaria + (ac)/365 - (dc)/365;
 
 		
 		this.peso = peso + AP - DP;
@@ -419,6 +423,10 @@ public class RiesgoHta {
 		else
 			return edadAct * DIAS + semCig * SEMANA;
 	}
+	
+	public String toString() {      
+		return String.valueOf("        "+ edad + "        "+ peso + "     "+ riesgoHTA + "       " + imc);  
+	} 
 
 	public int getEdad() {
 		return edad;
@@ -636,12 +644,13 @@ public class RiesgoHta {
 		this.balanceEnergia = balanceEnergia;
 	}
 
-	public double getInenad() {
-		return inenad;
+	
+	public double getIngestaAdecuada() {
+		return ingestaAdecuada;
 	}
 
-	public void setInenad(double inenad) {
-		this.inenad = inenad;
+	public void setIngestaAdecuada(double ingestaAdecuada) {
+		this.ingestaAdecuada = ingestaAdecuada;
 	}
 
 	public double getAP() {
@@ -796,6 +805,5 @@ public class RiesgoHta {
 		return diasCig;
 	}  
 	
-
+	
 }
-
