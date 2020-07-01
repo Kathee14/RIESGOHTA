@@ -77,8 +77,8 @@ public class Visita implements Serializable {
 	@Column(name="diabetes")
 	private String diabetes;
 	
-	@Column(name="sueño")
-	private String sueño;	
+	@Column(name="dormir")
+	private String dormir;	
 	
 	@Column(name = "alcohol")
 	private String alcohol;
@@ -106,10 +106,9 @@ public class Visita implements Serializable {
 	
 	public Visita () {}
 
-
 	public Visita(Enfermero enfermero, Paciente paciente, double altura, double peso, int sbp, int dbp,
 			int herencia, int fumar, int semanaF, int upDown, int upDownCalorias, int semanaC, int calorias,
-			String recomendaciones, String observaciones, String diabetes, String sueño, String alcohol, String estres,
+			String recomendaciones, String observaciones, String diabetes, String dormir, String alcohol, String estres,
 			String dieta, String alimentacion, String ejercicio) {
 		super();
 		this.enfermero = enfermero;
@@ -128,7 +127,7 @@ public class Visita implements Serializable {
 		this.recomendaciones = recomendaciones;
 		this.observaciones = observaciones;
 		this.diabetes = diabetes;
-		this.sueño = sueño;
+		this.dormir = dormir;
 		this.alcohol = alcohol;
 		this.estres = estres;
 		this.dieta = dieta;
@@ -275,12 +274,12 @@ public class Visita implements Serializable {
 		this.diabetes = diabetes;
 	}
 
-	public String getSueño() {
-		return sueño;
+	public String getDormir() {
+		return dormir;
 	}
 
-	public void setSueño(String sueño) {
-		this.sueño = sueño;
+	public void setDormir(String dormir) {
+		this.dormir = dormir;
 	}
 
 	public String getAlcohol() {

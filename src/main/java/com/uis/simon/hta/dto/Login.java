@@ -5,7 +5,15 @@ public class Login {
 	private String cc;
 	private String password;
 	private String role;
+	
+	
+	public Login(String cc, String password) {
+		super();
+		this.cc = cc;
+		this.password = password;
+	}
 	public String getCc() {
+		
 		return cc;
 	}
 	public void setCc(String cc) {

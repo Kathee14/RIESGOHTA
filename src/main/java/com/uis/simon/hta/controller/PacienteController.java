@@ -1,7 +1,6 @@
 package com.uis.simon.hta.controller;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uis.simon.hta.dto.NuevoPaciente;
 import com.uis.simon.hta.entity.Enfermero;
 import com.uis.simon.hta.entity.Paciente;
-import com.uis.simon.hta.mapper.MapPaciente;
 import com.uis.simon.hta.dto.JwtUser;
 import com.uis.simon.hta.dto.Login;
 import com.uis.simon.hta.dto.ModificarPaciente;
@@ -49,27 +47,12 @@ public class PacienteController {
 	@Autowired
 	private JwtGenerator jwtGenerator;
 
-	@GetMapping("/listau")
+	@GetMapping("/listaCompleta")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Paciente> getUsuarios(){
 		return pacienteService.findAll();
 	}
 	
-	@PostMapping("/findUsuario")
-	public ResponseEntity<?> findUsuario(@RequestBody NuevoPaciente nuevoPaciente){
-		Paciente pacienteDb = pacienteService.findPaciente(nuevoPaciente);
-		if(pacienteDb!=null) {
-			List<Paciente> pacientes = new ArrayList<>();
-			pacientes.add(pacienteDb);
-			List<ModificarPaciente> modificarPacientes = new ArrayList<>();
-			modificarPacientes = MapPaciente.convertirLista(pacientes);
-			return new ResponseEntity<>(modificarPacientes, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		}
-
-
 	@PostMapping("/registrar")
 	public ResponseEntity<?> addUsuario(@Valid @RequestBody NuevoPaciente nuevoPaciente,BindingResult bindingResult){
 		if(bindingResult.hasErrors())
@@ -96,7 +79,7 @@ public class PacienteController {
         return pacienteService.findById(id);
     }
 	
-	@PutMapping(path = {"/{id}"})
+	@PutMapping(path = {"/actualizar/{id}"})
 	public ResponseEntity<?> updateUsuario(@PathVariable(value="id")Long id,@RequestBody ModificarPaciente modificarPaciente){
 		Paciente paciente = pacienteService.findById(id);
 		Paciente verificar = pacienteService.findByCc(modificarPaciente.getCc());

@@ -25,6 +25,14 @@ public class Alimento {
 	@Column(name="tipo_alimento")
 	private String tipoalimento;	
 	
+	public Alimento() {}
+	
+	public Alimento(String alimento, int calorias, String tipoalimento) {
+		super();
+		this.alimento = alimento;
+		this.calorias = calorias;
+		this.tipoalimento = tipoalimento;
+	}
 	public Long getId() {
 		return id;
 	}

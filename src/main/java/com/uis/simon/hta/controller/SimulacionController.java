@@ -1,3 +1,5 @@
+
+
 package com.uis.simon.hta.controller;
 
 import java.util.List;
@@ -37,9 +39,9 @@ public class SimulacionController {
 	}
 	
 	@PostMapping("/simulaEnfermero")
-	public ResponseEntity<?>  simulaEnfermero(@RequestBody NuevaSimulacionEnfermero nuevaSimulacion){
-		List<ResultadoModelo> a = modelo.simulaEnfermero(nuevaSimulacion);
-		return new ResponseEntity<>(a,HttpStatus.OK);
+	public ResponseEntity<?> SimulaEnfermero(@Valid @RequestBody NuevaSimulacionEnfermero nuevaSimulacion){
+		List<ResultadoModelo> b = modelo.simulaEnfermero(nuevaSimulacion);
+		return new ResponseEntity<>(b, HttpStatus.OK);
 				
 	}
 	

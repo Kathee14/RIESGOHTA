@@ -11,8 +11,7 @@ public interface IVisitaService {
 	public List<Visita> findAll();
 	
 	public void saveVisita(Visita visita);
-	
-	
+		
 	List<Pacientes> findAllPacientesByEnfermero(Long enfermero);
 	
 	List<Enfermeros> findAllEnfermerosByPaciento(Long paciente);

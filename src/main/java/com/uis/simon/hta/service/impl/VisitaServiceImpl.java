@@ -37,6 +37,7 @@ public class VisitaServiceImpl implements IVisitaService {
 	@Override
 	public List<Pacientes> findAllPacientesByEnfermero(Long enfermero) {
 		List<Visita> v = visitaDao.findAllPacientesByEnfermero(enfermero);
+		if(v != null) {
 		List<Pacientes> lista = new ArrayList<Pacientes>();
 		
 			for (Visita a: v) {
@@ -47,6 +48,10 @@ public class VisitaServiceImpl implements IVisitaService {
 ;				lista.add(pacientes);
 			}
 		return lista;
+		} else 
+		{
+			return null;
+		}
 	}
 
 	@Override

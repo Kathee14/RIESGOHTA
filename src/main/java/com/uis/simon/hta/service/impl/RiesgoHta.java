@@ -181,7 +181,7 @@ public class RiesgoHta {
 			this.gastoEnergetico = (387-(7.31*edadAct)+(coefAct*(10.9*pesoAct)+(660.7*altura)));
 		}
 		
-		if(this.imc>18 && this.imc<24) {
+		if(this.imc>19 && this.imc<24) {
 			this.ingestaAdecuada = gastoEnergetico;
 		} else {
 			this.ingestaAdecuada = ingestaDiaria;
@@ -358,7 +358,7 @@ public class RiesgoHta {
 			this.gastoEnergetico = (387-(7.31*edad)+(coefAct*(10.9*pesoTotal)+(660.7*altura)));
 		}
 		
-		if(this.imc>18 && this.imc<24) {
+		if(this.imc>1 && this.imc<24) {
 			this.ingestaAdecuada = gastoEnergetico;
 		} else {
 			this.ingestaAdecuada = ingestaDiaria;
@@ -424,10 +424,6 @@ public class RiesgoHta {
 			return edadAct * DIAS + semCig * SEMANA;
 	}
 	
-	public String toString() {      
-		return String.valueOf("        "+ edad + "        "+ peso + "     "+ riesgoHTA + "       " + imc);  
-	} 
-
 	public int getEdad() {
 		return edad;
 	}

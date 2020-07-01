@@ -44,7 +44,7 @@ public class NuevaSimulacionEnfermero {
 	
 	private String diabetes;
 	
-	private String sueño;
+	private String dormir;
 	
 	private String alcohol;
 	
@@ -57,6 +57,41 @@ public class NuevaSimulacionEnfermero {
 	private String ejercicio;
 
 	public NuevaSimulacionEnfermero() {}
+	
+	public NuevaSimulacionEnfermero(String enfermero, String paciente, int sexo, double altura, int edad, double peso,
+			int sbp, int dbp, int herencia, int fumar, int semanaF, int upDown, int upDownCalorias, int semanaC,
+			int calorias, int tiempo, ArrayList<ActividadFront> actividades, String recomendaciones,
+			String observaciones, String diabetes, String dormir, String alcohol, String estres, String dieta,
+			String alimentacion, String ejercicio) {
+		
+		super();
+		this.enfermero = enfermero;
+		this.paciente = paciente;
+		this.sexo = sexo;
+		this.altura = altura;
+		this.edad = edad;
+		this.peso = peso;
+		this.sbp = sbp;
+		this.dbp = dbp;
+		this.herencia = herencia;
+		this.fumar = fumar;
+		this.semanaF = semanaF;
+		this.upDown = upDown;
+		this.upDownCalorias = upDownCalorias;
+		this.semanaC = semanaC;
+		this.calorias = calorias;
+		this.tiempo = tiempo;
+		this.actividades = actividades;
+		this.recomendaciones = recomendaciones;
+		this.observaciones = observaciones;
+		this.diabetes = diabetes;
+		this.dormir = dormir;
+		this.alcohol = alcohol;
+		this.estres = estres;
+		this.dieta = dieta;
+		this.alimentacion = alimentacion;
+		this.ejercicio = ejercicio;
+	}
 
 	public String getPaciente() {
 		return paciente;
@@ -303,13 +338,12 @@ public class NuevaSimulacionEnfermero {
 		this.ejercicio = ejercicio;
 	}
 
-	public String getSueño() {
-		return sueño;
+	public String getDormir() {
+		return dormir;
 	}
 
-	public void setSueño(String sueño) {
-		this.sueño = sueño;
+	public void setDormir(String dormir) {
+		this.dormir = dormir;
 	}
-
 
 }

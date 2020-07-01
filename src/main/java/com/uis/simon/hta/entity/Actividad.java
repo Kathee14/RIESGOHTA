@@ -23,6 +23,14 @@ public class Actividad {
 	@Column(name="mets")
 	private int mets;
 	
+	public Actividad() {}
+	
+	public Actividad(String nombreActividad, int mets) {
+		super();
+		this.nombreActividad = nombreActividad;
+		this.mets = mets;
+	}
+
 	public Long getId() {
 		return id;
 	}

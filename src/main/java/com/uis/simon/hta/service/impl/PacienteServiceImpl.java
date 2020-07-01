@@ -89,6 +89,5 @@ public class PacienteServiceImpl implements IPacienteService{
 		return (Paciente) pacienteDao.findByCc(cc);
 	}
 
-	
     
 	}

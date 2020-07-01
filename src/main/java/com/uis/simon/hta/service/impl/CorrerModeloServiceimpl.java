@@ -77,38 +77,37 @@ public class CorrerModeloServiceimpl implements ICorrerModeloService{
 		int t3 = lista.get(2).getTiempo();
 		int t4 = lista.get(3).getTiempo();
 		int t5 = lista.get(4).getTiempo();
-
-		List<ResultadoModelo> g = new ArrayList<ResultadoModelo>();
-
-		RiesgoHta r = new RiesgoHta (s.getEdad(),
-		s.getPeso(),
-		s.getSexo(),
-		s.getAltura(),
-		t1,t2,t3,t4,t5,
-		met1,met2,met3,met4,met5,
-		s.getUpDown(),
-		s.getCalorias(),
-		s.getUpDownCalorias(),
-		s.getSemanaC(),
-		s.getSemanaF(),
-		s.getSbp(),
-		s.getDbp(),
-		s.getHerencia(),
-		s.getFumar());
 		
+		List<ResultadoModelo> rta = new ArrayList<ResultadoModelo>();
+		RiesgoHta r = new RiesgoHta (s.getEdad(),
+				s.getPeso(),
+				s.getSexo(),
+				s.getAltura(),
+				t1,t2,t3,t4,t5,
+				met1,met2,met3,met4,met5,
+				s.getUpDown(),
+				s.getCalorias(),
+				s.getUpDownCalorias(),
+				s.getSemanaC(),
+				s.getSemanaF(),
+				s.getSbp(),
+				s.getDbp(),
+				s.getHerencia(),
+				s.getFumar());
 		int j =0;
 		for (int i=1; i<((s.getTiempo()-s.getEdad()+1)*365); i++) {
-			if(i == 365*j) { 
+			if(i == 365*j+1) { 
 				j = j+1;
-		ResultadoModelo valores = new ResultadoModelo(r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getPAL(), r.getImc());		
-		g.add(valores);
+				
+				ResultadoModelo valores = new ResultadoModelo (r.getEdad(), r.getRiesgoHTA(), r.getPeso(), r.getPAL(), r.getImc());		
+				rta.add(valores);
+				
+		}
+			
+				r.riesgo();
+		}
 		
-}
+		return rta;
+	}	
 	
-		r.riesgo();
-}
-
-return g;
-	}
-
 }
