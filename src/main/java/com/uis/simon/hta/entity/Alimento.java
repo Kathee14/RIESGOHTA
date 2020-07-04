@@ -19,7 +19,7 @@ public class Alimento {
 	@Column(name="alimento")
 	private String alimento;
 	
-	@Column(unique = true, name="calorias")
+	@Column(name="calorias")
 	private int calorias;
 	
 	@Column(name="tipo_alimento")

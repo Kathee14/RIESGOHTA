@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>HTA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>HTA</name>
 	<description>Application to show the risk of high blood pressure</description>
 
